@@ -14,7 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("Sticky notes");
         primaryStage.setScene(new Scene(root, 1500, 900));
         primaryStage.show();
-        //This is a test :)
+        //This is a test 1 :)
     }
 
 
