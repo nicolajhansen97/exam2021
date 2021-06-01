@@ -1,8 +1,10 @@
 package sample;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public interface StickyNoteInterface {
+
     //farve, størrelse, tekstarea, (Maybe coordinates),delete node
     public void setColor(Color color);
     public Color getColor();
