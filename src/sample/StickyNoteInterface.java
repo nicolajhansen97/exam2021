@@ -1,3 +1,5 @@
+package sample;
+
 import javafx.scene.paint.Color;
 
 public interface StickyNoteInterface {

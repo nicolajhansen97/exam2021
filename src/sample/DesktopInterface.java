@@ -1,3 +1,5 @@
+package sample;
+
 public interface DesktopInterface {
     //create sticky note, search sticky notes, listview
 

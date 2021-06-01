@@ -1,3 +1,5 @@
+package sample;
+
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
