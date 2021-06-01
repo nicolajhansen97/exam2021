@@ -1,3 +1,5 @@
+package sample;
+
 public interface SaveInterface {
 
     public void getFilepath();
