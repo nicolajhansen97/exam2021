@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.input.MouseEvent;
+import sample.StickyNote;
 
 import java.util.ArrayList;
 
