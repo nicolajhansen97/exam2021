@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public interface loadInterface {
+public interface LoadInterface {
     public void getFilepath();
 
     public ArrayList loadTextFile();

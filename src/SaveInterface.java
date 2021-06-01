@@ -1,4 +1,4 @@
-public interface saveInterface {
+public interface SaveInterface {
 
     public void getFilepath();
 
