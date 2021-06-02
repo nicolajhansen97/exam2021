@@ -10,7 +10,7 @@ public class StickyNote implements StickyNoteInterface {
 
     private Color color = Color.YELLOW;
     private String text;
-    private int x,y;
+    private double x,y;
     private int ID;
     private final double sizeOfStickyNote = 200;
     private final double sizeOfTextOnStickyNote = 160;
@@ -18,6 +18,12 @@ public class StickyNote implements StickyNoteInterface {
     private Pane stickyNote;
     private TextArea textOnStickyNote;
     private Button deleteStickyNote;
+
+    public void update(){
+        stickyNote.setLayoutX(x);
+        stickyNote.setLayoutY(y);
+    }
+
 
     public Pane createPane(){
         stickyNote = new Pane();
@@ -64,16 +70,16 @@ public class StickyNote implements StickyNoteInterface {
     public String getText() { return text;}
 
     @Override
-    public void setCoordinate(int x, int y) {
+    public void setCoordinate(double x, double y) {
         this.x=x;
         this.y=y;
     }
 
     @Override
-    public int getXCoordinate() { return x; }
+    public double getXCoordinate() { return x; }
 
     @Override
-    public int getYCoordinate() { return y; }
+    public double getYCoordinate() { return y; }
 
     @Override
     public void setID(int ID) {

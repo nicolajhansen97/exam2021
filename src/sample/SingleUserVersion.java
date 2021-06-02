@@ -32,26 +32,18 @@ public class SingleUserVersion {
     ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCount = 0;
 
+
     @FXML
     public void createNote() {
 
         listTest.add(new StickyNote());
-        listTest.get(0).setCoordinate(globalCount,0);
+        listTest.get(listTest.size()-1).setCoordinate(globalCount,0);
+        listTest.get(listTest.size()-1).setID(listTest.size());
         globalCount = globalCount+250;
+        System.out.println(listTest.get(listTest.size()-1).getID());
 
-        //borderPane.setCenter(listTest.get(0).createPane());
+        pane.getChildren().addAll(listTest.get(listTest.size()-1).createPane());
 
-        pane.getChildren().addAll(listTest.get(0).createPane());
-        //stackPane.getChildren().addAll(listTest.get(0).createPane());
-
-
-        /*
-        firstTest.setColor(javafx.scene.paint.Color.RED);
-        //boxTest.setFill(firstTest.getColor());
-        listTest.add(new StickyNote());
-        boardP.getChildren().addAll(listTest.get(0).getP());
-       // boardP.setStyle("-fx-background-color: #1ea4a9");
-         */
     }
     //Works but need something better
     @FXML
@@ -59,9 +51,9 @@ public class SingleUserVersion {
         pane.getChildren().get(0).setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                pane.getChildren().get(0).setLayoutX(event.getX());
-                pane.getChildren().get(0).setLayoutY(event.getY());
-
+                //use dataBinding maybe
+                listTest.get(0).setCoordinate(event.getSceneX()-25,event.getSceneY()-50);
+                listTest.get(0).update();
             }
         });
     }

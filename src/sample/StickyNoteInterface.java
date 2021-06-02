@@ -12,9 +12,9 @@ public interface StickyNoteInterface {
     public void setText(String text);
     public String getText();
 
-    public void setCoordinate(int x, int y);
-    public int getXCoordinate();
-    public int getYCoordinate();
+    public void setCoordinate(double x,double y);
+    public double getXCoordinate();
+    public double getYCoordinate();
 
     public void setID(int ID);
     public int getID();
