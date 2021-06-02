@@ -31,6 +31,18 @@ public class SingleUserVersion {
     StickyNote firstTest = new StickyNote();
     ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCount = 0;
+    int globalID = 1;
+
+    EventHandler<ActionEvent> s = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            Button b = (Button) event.getSource();
+            Pane p = (Pane) b.getParent();
+            Pane p2 = (Pane) p.getParent();
+            p2.getChildren().remove(p);
+        }
+    };
+
 
 
     @FXML
@@ -38,16 +50,38 @@ public class SingleUserVersion {
 
         listTest.add(new StickyNote());
         listTest.get(listTest.size()-1).setCoordinate(globalCount,0);
-        listTest.get(listTest.size()-1).setID(listTest.size());
+        listTest.get(listTest.size()-1).setID(globalID++);
         globalCount = globalCount+250;
         System.out.println(listTest.get(listTest.size()-1).getID());
 
         pane.getChildren().addAll(listTest.get(listTest.size()-1).createPane());
 
+        for (StickyNote stickyNote : listTest) {
+            stickyNote.getStickyNote().setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    //delete
+                    stickyNote.getDeleteStickyNote().setOnAction(s);
+                    //move
+                    stickyNote.getStickyNote().setOnMouseDragged(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            stickyNote.setCoordinate(event.getSceneX()-25,event.getSceneY()-50);
+                            stickyNote.update();
+                        }
+                    });
+                }
+            });
+        }
+
+
     }
+
+
     //Works but need something better
     @FXML
     public void startMethod(){
+        /*
         pane.getChildren().get(0).setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -56,7 +90,7 @@ public class SingleUserVersion {
                 listTest.get(0).update();
             }
         });
+
+         */
     }
-
-
 }

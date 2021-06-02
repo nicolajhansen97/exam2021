@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
@@ -19,11 +21,18 @@ public class StickyNote implements StickyNoteInterface {
     private TextArea textOnStickyNote;
     private Button deleteStickyNote;
 
+    public Button getDeleteStickyNote(){
+        return deleteStickyNote;
+    }
+
+    public Pane getStickyNote(){
+        return stickyNote;
+    }
+
     public void update(){
         stickyNote.setLayoutX(x);
         stickyNote.setLayoutY(y);
     }
-
 
     public Pane createPane(){
         stickyNote = new Pane();
@@ -41,6 +50,7 @@ public class StickyNote implements StickyNoteInterface {
         textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
         textOnStickyNote.setLayoutX((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
         textOnStickyNote.setLayoutY((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
+        textOnStickyNote.setWrapText(true);
         textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
 
         stickyNote.getChildren().addAll(deleteStickyNote,textOnStickyNote);
