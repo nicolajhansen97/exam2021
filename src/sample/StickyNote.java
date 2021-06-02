@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -7,26 +8,43 @@ import javafx.scene.paint.Color;
 
 public class StickyNote implements StickyNoteInterface {
 
-    public Color color;
-    public String text;
-    public int x, y, id;
+    private Color color = Color.YELLOW;
+    private String text;
+    private int x,y;
+    private int ID;
+    private final double sizeOfStickyNote = 200;
+    private final double sizeOfTextOnStickyNote = 160;
+    private final double sizeOfButton = 30;
+    private Pane stickyNote;
+    private TextArea textOnStickyNote;
+    private Button deleteStickyNote;
 
-    final int size = 30;
-    VBox p;
-    TextArea t;
+    public Pane createPane(){
+        stickyNote = new Pane();
 
+        String colorS = String.format("#%02x%02x%02x",
+                (int) (255 * color.getRed()),
+                (int) (255 * color.getGreen()),
+                (int) (255 * color.getBlue()));
 
-    public Pane getP(){
-        t = new TextArea();
-        p = new VBox();
-        t.setMaxSize(25,25);
-        p.setMaxSize(size,size);
-        p.setLayoutX(40);
-        p.setLayoutY(40);
-        p.setStyle("-fx-background-color: #2bff2f");
-        //p.getChildren().addAll(t);
+        deleteStickyNote = new Button("X");
+        deleteStickyNote.setMaxSize(sizeOfButton,sizeOfButton);
+        deleteStickyNote.setLayoutX(sizeOfStickyNote-sizeOfButton);
 
-        return p;
+        textOnStickyNote = new TextArea();
+        textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
+        textOnStickyNote.setLayoutX((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
+        textOnStickyNote.setLayoutY((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
+        textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
+
+        stickyNote.getChildren().addAll(deleteStickyNote,textOnStickyNote);
+        stickyNote.setMaxSize(sizeOfStickyNote,sizeOfStickyNote);
+        stickyNote.setMinSize(sizeOfStickyNote,sizeOfStickyNote);
+        stickyNote.setLayoutY(y);
+        stickyNote.setLayoutX(x);
+        stickyNote.setStyle("-fx-background-color: "+colorS+"");
+
+        return stickyNote;
     }
 
     @Override
@@ -35,9 +53,7 @@ public class StickyNote implements StickyNoteInterface {
     }
 
     @Override
-    public Color getColor() {
-        return color;
-    }
+    public Color getColor() { return color;}
 
     @Override
     public void setText(String text) {
@@ -45,33 +61,25 @@ public class StickyNote implements StickyNoteInterface {
     }
 
     @Override
-    public String getText() {
-        return text;
-    }
+    public String getText() { return text;}
 
     @Override
     public void setCoordinate(int x, int y) {
-        this.x = x;
-        this.y = y;
+        this.x=x;
+        this.y=y;
     }
 
     @Override
-    public int getXCoordinate() {
-        return x;
+    public int getXCoordinate() { return x; }
+
+    @Override
+    public int getYCoordinate() { return y; }
+
+    @Override
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     @Override
-    public int getYCoordinate() {
-        return y;
-    }
-
-    @Override
-    public void setID(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public int getID() {
-        return id;
-    }
+    public int getID() { return ID;}
 }
