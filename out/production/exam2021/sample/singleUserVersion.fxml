@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SingleUserVersion">
@@ -12,10 +13,10 @@
          </children>
       </Pane>
    </top>
-   <bottom>
-      <Pane prefHeight="162.0" prefWidth="500.0" style="-fx-background-color: rgb(200,200,200);" BorderPane.alignment="CENTER" />
-   </bottom>
    <center>
       <Pane fx:id="pane" onMouseClicked="#startMethod" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <HBox fx:id="hBox" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: rgb(200,200,200);" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

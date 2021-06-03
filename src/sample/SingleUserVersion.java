@@ -16,6 +16,7 @@ public class SingleUserVersion {
 
     @FXML
     Pane pane;
+
     @FXML
     HBox hBox;
 
@@ -59,6 +60,15 @@ public class SingleUserVersion {
                 public void handle(MouseEvent event) {
                     //delete
                     stickyNote.getDeleteStickyNote().setOnAction(s);
+                    //Test button
+                    stickyNote.getTestButton().setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            try {
+                                hBox.getChildren().add(stickyNote.getStickyNote());
+                            }catch (Exception e){}
+                        }
+                    });
                     //Change Color
                     stickyNote.getColorStickyNoteAqua().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
