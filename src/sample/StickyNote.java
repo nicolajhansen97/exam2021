@@ -16,14 +16,14 @@ public class StickyNote implements StickyNoteInterface {
     private String text;
     private double x,y;
     private int ID;
-    private final double sizeOfStickyNote = 200;
-    private final double sizeOfTextOnStickyNote = 160;
+    private final double sizeOfStickyNote = 275;
+    private final double sizeOfTextOnStickyNote = 200;
     private final double sizeOfButton = 30;
     private Pane stickyNote;
     private TextArea textOnStickyNote;
     private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow;
-    private ImageView colorPictures;
-    private Image colorPicture;
+    private ImageView[] colorPictures = new ImageView[5];
+    private Image[] colorPicture = new Image[5];
 
     public Button getDeleteStickyNote(){
         return deleteStickyNote;
@@ -56,6 +56,11 @@ public class StickyNote implements StickyNoteInterface {
                 (int) (255 * color.getBlue()));
         textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
         stickyNote.setStyle("-fx-background-color: "+colorS+"");
+        colorStickyNoteAqua.setStyle("-fx-background-color:"+colorS+"");
+        colorStickyNotePurple.setStyle("-fx-background-color:"+colorS+"");
+        colorStickyNoteRed.setStyle("-fx-background-color:"+colorS+"");
+        colorStickyNoteYellow.setStyle("-fx-background-color:"+colorS+"");
+        deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
     }
 
     public Pane createPane(){
@@ -66,29 +71,57 @@ public class StickyNote implements StickyNoteInterface {
                 (int) (255 * color.getGreen()),
                 (int) (255 * color.getBlue()));
 
-        deleteStickyNote = new Button("X");
+        deleteStickyNote = new Button();
         deleteStickyNote.setMaxSize(sizeOfButton,sizeOfButton);
-        deleteStickyNote.setLayoutX(sizeOfStickyNote-sizeOfButton);
+        deleteStickyNote.setLayoutX(sizeOfStickyNote-50);
+        colorPicture[4] = new Image("Pictures/trash.png");
+        colorPictures[4] = new ImageView(colorPicture[4]);
+        deleteStickyNote.setGraphic(colorPictures[4]);
+        deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
 
         colorStickyNoteAqua = new Button();
         colorStickyNoteAqua.setMaxSize(sizeOfButton,sizeOfButton);
         colorStickyNoteAqua.setLayoutX(0);
-        colorPicture = new Image("Pictures/AquaProject.png");
-        colorPictures = new ImageView(colorPicture);
-        colorPictures.setFitHeight(30);
-        colorPictures.setPreserveRatio(true);
-        colorStickyNoteAqua.setPrefSize(30,30);
-        colorStickyNoteAqua.setGraphic(colorPictures);
+        colorPicture[0] = new Image("Pictures/AquaProject.png");
+        colorPictures[0] = new ImageView(colorPicture[0]);
+        colorPictures[0].setFitHeight(25);
+        colorPictures[0].setFitWidth(25);
+        colorStickyNoteAqua.setPrefSize(25,25);
+        colorStickyNoteAqua.setGraphic(colorPictures[0]);
+        colorStickyNoteAqua.setStyle("-fx-background-color:"+colorS+"");
 
-        colorStickyNotePurple = new Button("P");
+        colorStickyNotePurple = new Button();
         colorStickyNotePurple.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNotePurple.setLayoutX(30);
-        colorStickyNoteRed = new Button("R");
+        colorStickyNotePurple.setLayoutX(50);
+        colorPicture[1] = new Image("Pictures/PurpleProject.png");
+        colorPictures[1] = new ImageView(colorPicture[1]);
+        colorPictures[1].setFitHeight(25);
+        colorPictures[1].setFitWidth(25);
+        colorStickyNotePurple.setPrefSize(25,25);
+        colorStickyNotePurple.setGraphic(colorPictures[1]);
+        colorStickyNotePurple.setStyle("-fx-background-color:"+colorS+"");
+
+        colorStickyNoteRed = new Button();
         colorStickyNoteRed.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNoteRed.setLayoutX(60);
-        colorStickyNoteYellow = new Button("Y");
+        colorStickyNoteRed.setLayoutX(100);
+        colorPicture[2] = new Image("Pictures/RedProject.png");
+        colorPictures[2] = new ImageView(colorPicture[2]);
+        colorPictures[2].setFitHeight(25);
+        colorPictures[2].setFitWidth(25);
+        colorStickyNoteRed.setPrefSize(25,25);
+        colorStickyNoteRed.setGraphic(colorPictures[2]);
+        colorStickyNoteRed.setStyle("-fx-background-color:"+colorS+"");
+
+        colorStickyNoteYellow = new Button();
         colorStickyNoteYellow.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNoteYellow.setLayoutX(90);
+        colorStickyNoteYellow.setLayoutX(150);
+        colorPicture[3] = new Image("Pictures/YellowProject.png");
+        colorPictures[3] = new ImageView(colorPicture[3]);
+        colorPictures[3].setFitWidth(25);
+        colorPictures[3].setFitHeight(25);
+        colorStickyNoteYellow.setPrefSize(25,25);
+        colorStickyNoteYellow.setGraphic(colorPictures[3]);
+        colorStickyNoteYellow.setStyle("-fx-background-color:"+colorS+"");
 
         textOnStickyNote = new TextArea();
         textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
