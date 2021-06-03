@@ -19,7 +19,7 @@ public class StickyNote implements StickyNoteInterface {
     private final double sizeOfStickyNote = 275;
     private final double sizeOfTextOnStickyNote = 200;
     private final double sizeOfButton = 30;
-    private final double prefIconSize = 25;
+    public final double prefIconSize = 25;
     private Pane stickyNote;
     private TextArea textOnStickyNote;
     private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
@@ -96,8 +96,8 @@ public class StickyNote implements StickyNoteInterface {
         //THIS IS A TEST
         testButton = new Button();
         testButton.setMaxSize(sizeOfButton,sizeOfButton);
-        testButton.setLayoutX(sizeOfStickyNote-sizeOfButton);
-        testButton.setLayoutY(sizeOfStickyNote-sizeOfButton);
+        testButton.setLayoutX(sizeOfStickyNote-sizeOfButton-15);
+        testButton.setLayoutY(sizeOfStickyNote-sizeOfButton-8);
         colorPicture[5] = new Image("Pictures/down.png");
         colorPictures[5] = new ImageView(colorPicture[5]);
         colorPicture[6] = new Image("Pictures/UP.png");

@@ -68,9 +68,12 @@ public class SingleUserVersion {
                             try {
                                 hBox.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getUp());
+                                stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
                             }catch (Exception e){
                                 pane.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getDown());
+                                stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
+
                             }
                         }
                     });
