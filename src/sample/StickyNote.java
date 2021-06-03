@@ -19,6 +19,7 @@ public class StickyNote implements StickyNoteInterface {
     private final double sizeOfStickyNote = 275;
     private final double sizeOfTextOnStickyNote = 200;
     private final double sizeOfButton = 30;
+    private final double prefIconSize = 25;
     private Pane stickyNote;
     private TextArea textOnStickyNote;
     private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
@@ -95,9 +96,9 @@ public class StickyNote implements StickyNoteInterface {
         colorStickyNoteAqua.setLayoutX(0);
         colorPicture[0] = new Image("Pictures/AquaProject.png");
         colorPictures[0] = new ImageView(colorPicture[0]);
-        colorPictures[0].setFitHeight(25);
-        colorPictures[0].setFitWidth(25);
-        colorStickyNoteAqua.setPrefSize(25,25);
+        colorPictures[0].setFitHeight(prefIconSize);
+        colorPictures[0].setFitWidth(prefIconSize);
+        colorStickyNoteAqua.setPrefSize(prefIconSize,prefIconSize);
         colorStickyNoteAqua.setGraphic(colorPictures[0]);
         colorStickyNoteAqua.setStyle("-fx-background-color:"+colorS+"");
 
@@ -106,9 +107,9 @@ public class StickyNote implements StickyNoteInterface {
         colorStickyNotePurple.setLayoutX(50);
         colorPicture[1] = new Image("Pictures/PurpleProject.png");
         colorPictures[1] = new ImageView(colorPicture[1]);
-        colorPictures[1].setFitHeight(25);
-        colorPictures[1].setFitWidth(25);
-        colorStickyNotePurple.setPrefSize(25,25);
+        colorPictures[1].setFitHeight(prefIconSize);
+        colorPictures[1].setFitWidth(prefIconSize);
+        colorStickyNotePurple.setPrefSize(prefIconSize,prefIconSize);
         colorStickyNotePurple.setGraphic(colorPictures[1]);
         colorStickyNotePurple.setStyle("-fx-background-color:"+colorS+"");
 
@@ -117,9 +118,9 @@ public class StickyNote implements StickyNoteInterface {
         colorStickyNoteRed.setLayoutX(100);
         colorPicture[2] = new Image("Pictures/RedProject.png");
         colorPictures[2] = new ImageView(colorPicture[2]);
-        colorPictures[2].setFitHeight(25);
-        colorPictures[2].setFitWidth(25);
-        colorStickyNoteRed.setPrefSize(25,25);
+        colorPictures[2].setFitHeight(prefIconSize);
+        colorPictures[2].setFitWidth(prefIconSize);
+        colorStickyNoteRed.setPrefSize(prefIconSize,prefIconSize);
         colorStickyNoteRed.setGraphic(colorPictures[2]);
         colorStickyNoteRed.setStyle("-fx-background-color:"+colorS+"");
 
@@ -128,9 +129,9 @@ public class StickyNote implements StickyNoteInterface {
         colorStickyNoteYellow.setLayoutX(150);
         colorPicture[3] = new Image("Pictures/YellowProject.png");
         colorPictures[3] = new ImageView(colorPicture[3]);
-        colorPictures[3].setFitWidth(25);
-        colorPictures[3].setFitHeight(25);
-        colorStickyNoteYellow.setPrefSize(25,25);
+        colorPictures[3].setFitWidth(prefIconSize);
+        colorPictures[3].setFitHeight(prefIconSize);
+        colorStickyNoteYellow.setPrefSize(prefIconSize,prefIconSize);
         colorStickyNoteYellow.setGraphic(colorPictures[3]);
         colorStickyNoteYellow.setStyle("-fx-background-color:"+colorS+"");
 

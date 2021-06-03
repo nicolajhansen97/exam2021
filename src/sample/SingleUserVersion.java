@@ -27,6 +27,7 @@ public class SingleUserVersion {
     ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCountX = 0;
     int globalCountY = 0;
+    final int noteSizeDifference = 250;
     int globalID = 1;
 
     EventHandler<ActionEvent> s = new EventHandler<ActionEvent>() {
@@ -49,7 +50,7 @@ public class SingleUserVersion {
             listTest.get(listTest.size() - 1).setCoordinate(globalCountX, globalCountY);
         }
         listTest.get(listTest.size()-1).setID(globalID++);
-        globalCountX = globalCountX +250;
+        globalCountX = globalCountX + noteSizeDifference;
         System.out.println(listTest.get(listTest.size()-1).getID());
 
         pane.getChildren().addAll(listTest.get(listTest.size()-1).createPane());
