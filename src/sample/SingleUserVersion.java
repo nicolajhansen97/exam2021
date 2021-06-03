@@ -3,9 +3,7 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -28,12 +26,40 @@ public class SingleUserVersion {
     @FXML
     BorderPane borderPane;
 
+    @FXML
+    MenuBar menuBar;
+
     StickyNote firstTest = new StickyNote();
     ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCountX = 0;
     int globalCountY = 0;
     final int noteSizeDifference = 250;
     int globalID = 1;
+
+
+    public void initialize(){
+
+        Menu fileMenu = new Menu("Menu");
+        MenuItem menuSettings = new MenuItem("Settings");
+        MenuItem menuClose = new MenuItem("Close");
+        fileMenu.getItems().addAll(menuSettings,menuClose);
+
+        Menu saveMenu = new Menu("Save");
+        MenuItem saveBoard = new MenuItem("Save board");
+        MenuItem saveEverything = new MenuItem("Save everything");
+        saveMenu.getItems().addAll(saveBoard,saveEverything);
+
+        Menu loadMenu = new Menu("Load");
+        MenuItem loadBoard = new MenuItem("Load board");
+        MenuItem loadEverything = new MenuItem("Load everything");
+        loadMenu.getItems().addAll(loadBoard,loadEverything);
+
+        menuBar.getMenus().addAll(fileMenu,saveMenu,loadMenu);
+
+        menuClose.setOnAction(e -> {
+         Board.closeProgram();
+        });
+    }
 
 
     EventHandler<ActionEvent> s = new EventHandler<ActionEvent>() {
@@ -51,16 +77,16 @@ public class SingleUserVersion {
     public void createNote() {
         listTest.add(new StickyNote());
 
-        if (globalCountX >pane.getWidth()) {
+        if (globalCountX > pane.getWidth()) {
             globalCountX = 0;
-        }else {
+        } else {
             listTest.get(listTest.size() - 1).setCoordinate(globalCountX, globalCountY);
         }
-        listTest.get(listTest.size()-1).setID(globalID++);
+        listTest.get(listTest.size() - 1).setID(globalID++);
         globalCountX = globalCountX + noteSizeDifference;
-        System.out.println(listTest.get(listTest.size()-1).getID());
+        System.out.println(listTest.get(listTest.size() - 1).getID());
 
-        pane.getChildren().addAll(listTest.get(listTest.size()-1).createPane());
+        pane.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
 
         for (StickyNote stickyNote : listTest) {
             stickyNote.getStickyNote().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -76,7 +102,7 @@ public class SingleUserVersion {
                                 hBox.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getUp());
                                 stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 pane.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getDown());
                                 stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
@@ -119,11 +145,11 @@ public class SingleUserVersion {
                         public void handle(MouseEvent event) {
                             //if ((stickyNote.getXCoordinate()>=-25 &&stickyNote.getXCoordinate() <=1500-250)
                             //&& stickyNote.getYCoordinate()>=-50 &&stickyNote.getYCoordinate() <=550-225) {
-                                stickyNote.setCoordinate(event.getSceneX() - 25, event.getSceneY() - 50);
-                                stickyNote.update();
+                            stickyNote.setCoordinate(event.getSceneX() - 25, event.getSceneY() - 50);
+                            stickyNote.update();
                             //}else {
-                              //  stickyNote.setCoordinate(575,150);
-                              //  stickyNote.update();
+                            //  stickyNote.setCoordinate(575,150);
+                            //  stickyNote.update();
                             //}
                         }
                     });
@@ -133,7 +159,6 @@ public class SingleUserVersion {
 
 
     }
-
 
     //Works but need something better
     @FXML
