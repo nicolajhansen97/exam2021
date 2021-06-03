@@ -67,7 +67,11 @@ public class SingleUserVersion {
                         public void handle(ActionEvent event) {
                             try {
                                 hBox.getChildren().add(stickyNote.getStickyNote());
-                            }catch (Exception e){}
+                                stickyNote.getTestButton().setGraphic(stickyNote.getUp());
+                            }catch (Exception e){
+                                pane.getChildren().add(stickyNote.getStickyNote());
+                                stickyNote.getTestButton().setGraphic(stickyNote.getDown());
+                            }
                         }
                     });
                     //Change Color
