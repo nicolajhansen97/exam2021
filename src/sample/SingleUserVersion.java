@@ -3,20 +3,14 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SingleUserVersion {
 
@@ -30,7 +24,8 @@ public class SingleUserVersion {
 
     StickyNote firstTest = new StickyNote();
     ArrayList<StickyNote> listTest = new ArrayList<>();
-    int globalCount = 0;
+    int globalCountX = 0;
+    int globalCountY = 0;
     int globalID = 1;
 
     EventHandler<ActionEvent> s = new EventHandler<ActionEvent>() {
@@ -44,14 +39,16 @@ public class SingleUserVersion {
     };
 
 
-
     @FXML
     public void createNote() {
-
         listTest.add(new StickyNote());
-        listTest.get(listTest.size()-1).setCoordinate(globalCount,0);
+        if (globalCountX >pane.getWidth()) {
+            globalCountX = 0;
+        }else {
+            listTest.get(listTest.size() - 1).setCoordinate(globalCountX, globalCountY);
+        }
         listTest.get(listTest.size()-1).setID(globalID++);
-        globalCount = globalCount+250;
+        globalCountX = globalCountX +250;
         System.out.println(listTest.get(listTest.size()-1).getID());
 
         pane.getChildren().addAll(listTest.get(listTest.size()-1).createPane());
@@ -62,6 +59,35 @@ public class SingleUserVersion {
                 public void handle(MouseEvent event) {
                     //delete
                     stickyNote.getDeleteStickyNote().setOnAction(s);
+                    //Change Color
+                    stickyNote.getColorStickyNoteAqua().setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            stickyNote.setColor(Color.AQUA);
+                            stickyNote.update();
+                        }
+                    });
+                    stickyNote.getColorStickyNotePurple().setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            stickyNote.setColor(Color.PURPLE);
+                            stickyNote.update();
+                        }
+                    });
+                    stickyNote.getColorStickyNoteRed().setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            stickyNote.setColor(Color.RED);
+                            stickyNote.update();
+                        }
+                    });
+                    stickyNote.getColorStickyNoteYellow().setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            stickyNote.setColor(Color.YELLOW);
+                            stickyNote.update();
+                        }
+                    });
                     //move
                     stickyNote.getStickyNote().setOnMouseDragged(new EventHandler<MouseEvent>() {
                         @Override

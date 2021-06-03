@@ -19,10 +19,23 @@ public class StickyNote implements StickyNoteInterface {
     private final double sizeOfButton = 30;
     private Pane stickyNote;
     private TextArea textOnStickyNote;
-    private Button deleteStickyNote;
+    private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow;
 
     public Button getDeleteStickyNote(){
         return deleteStickyNote;
+    }
+
+    public Button getColorStickyNoteAqua(){
+        return colorStickyNoteAqua;
+    }
+    public Button getColorStickyNotePurple(){
+        return colorStickyNotePurple;
+    }
+    public Button getColorStickyNoteRed(){
+        return colorStickyNoteRed;
+    }
+    public Button getColorStickyNoteYellow(){
+        return colorStickyNoteYellow;
     }
 
     public Pane getStickyNote(){
@@ -32,6 +45,13 @@ public class StickyNote implements StickyNoteInterface {
     public void update(){
         stickyNote.setLayoutX(x);
         stickyNote.setLayoutY(y);
+
+        String colorS = String.format("#%02x%02x%02x",
+                (int) (255 * color.getRed()),
+                (int) (255 * color.getGreen()),
+                (int) (255 * color.getBlue()));
+        textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
+        stickyNote.setStyle("-fx-background-color: "+colorS+"");
     }
 
     public Pane createPane(){
@@ -46,6 +66,19 @@ public class StickyNote implements StickyNoteInterface {
         deleteStickyNote.setMaxSize(sizeOfButton,sizeOfButton);
         deleteStickyNote.setLayoutX(sizeOfStickyNote-sizeOfButton);
 
+        colorStickyNoteAqua = new Button("A");
+        colorStickyNoteAqua.setMaxSize(sizeOfButton,sizeOfButton);
+        colorStickyNoteAqua.setLayoutX(0);
+        colorStickyNotePurple = new Button("P");
+        colorStickyNotePurple.setMaxSize(sizeOfButton,sizeOfButton);
+        colorStickyNotePurple.setLayoutX(30);
+        colorStickyNoteRed = new Button("R");
+        colorStickyNoteRed.setMaxSize(sizeOfButton,sizeOfButton);
+        colorStickyNoteRed.setLayoutX(60);
+        colorStickyNoteYellow = new Button("Y");
+        colorStickyNoteYellow.setMaxSize(sizeOfButton,sizeOfButton);
+        colorStickyNoteYellow.setLayoutX(90);
+
         textOnStickyNote = new TextArea();
         textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
         textOnStickyNote.setLayoutX((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
@@ -53,7 +86,8 @@ public class StickyNote implements StickyNoteInterface {
         textOnStickyNote.setWrapText(true);
         textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
 
-        stickyNote.getChildren().addAll(deleteStickyNote,textOnStickyNote);
+        stickyNote.getChildren().addAll(deleteStickyNote,textOnStickyNote,
+                colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow);
         stickyNote.setMaxSize(sizeOfStickyNote,sizeOfStickyNote);
         stickyNote.setMinSize(sizeOfStickyNote,sizeOfStickyNote);
         stickyNote.setLayoutY(y);
@@ -73,7 +107,7 @@ public class StickyNote implements StickyNoteInterface {
 
     @Override
     public void setText(String text) {
-        this.text = text;
+        this.text = textOnStickyNote.getText();
     }
 
     @Override
