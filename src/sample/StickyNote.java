@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -20,6 +22,8 @@ public class StickyNote implements StickyNoteInterface {
     private Pane stickyNote;
     private TextArea textOnStickyNote;
     private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow;
+    private ImageView colorPictures;
+    private Image colorPicture;
 
     public Button getDeleteStickyNote(){
         return deleteStickyNote;
@@ -66,9 +70,16 @@ public class StickyNote implements StickyNoteInterface {
         deleteStickyNote.setMaxSize(sizeOfButton,sizeOfButton);
         deleteStickyNote.setLayoutX(sizeOfStickyNote-sizeOfButton);
 
-        colorStickyNoteAqua = new Button("A");
+        colorStickyNoteAqua = new Button();
         colorStickyNoteAqua.setMaxSize(sizeOfButton,sizeOfButton);
         colorStickyNoteAqua.setLayoutX(0);
+        colorPicture = new Image("Pictures/AquaProject.png");
+        colorPictures = new ImageView(colorPicture);
+        colorPictures.setFitHeight(30);
+        colorPictures.setPreserveRatio(true);
+        colorStickyNoteAqua.setPrefSize(30,30);
+        colorStickyNoteAqua.setGraphic(colorPictures);
+
         colorStickyNotePurple = new Button("P");
         colorStickyNotePurple.setMaxSize(sizeOfButton,sizeOfButton);
         colorStickyNotePurple.setLayoutX(30);
