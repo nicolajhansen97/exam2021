@@ -24,11 +24,18 @@ public class StickyNote implements StickyNoteInterface {
     private TextArea textOnStickyNote;
     private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
     testButton;
-    private ImageView[] colorPictures = new ImageView[5];
-    private Image[] colorPicture = new Image[5];
+    private ImageView[] colorPictures = new ImageView[7];
+    private Image[] colorPicture = new Image[7];
 
     public Button getDeleteStickyNote(){
         return deleteStickyNote;
+    }
+
+    public ImageView getDown(){
+        return colorPictures[5];
+    }
+    public ImageView getUp(){
+        return colorPictures[6];
     }
 
     public Button getTestButton() {
@@ -67,6 +74,7 @@ public class StickyNote implements StickyNoteInterface {
         colorStickyNoteRed.setStyle("-fx-background-color:"+colorS+"");
         colorStickyNoteYellow.setStyle("-fx-background-color:"+colorS+"");
         deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
+        testButton.setStyle("-fx-background-color:"+colorS+"");
     }
 
     public Pane createPane(){
@@ -86,10 +94,17 @@ public class StickyNote implements StickyNoteInterface {
         deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
 
         //THIS IS A TEST
-        testButton = new Button("B");
+        testButton = new Button();
         testButton.setMaxSize(sizeOfButton,sizeOfButton);
         testButton.setLayoutX(sizeOfStickyNote-sizeOfButton);
         testButton.setLayoutY(sizeOfStickyNote-sizeOfButton);
+        colorPicture[5] = new Image("Pictures/down.png");
+        colorPictures[5] = new ImageView(colorPicture[5]);
+        colorPicture[6] = new Image("Pictures/UP.png");
+        colorPictures[6] = new ImageView(colorPicture[6]);
+        testButton.setGraphic(colorPictures[5]);
+        testButton.setPrefSize(prefIconSize,prefIconSize);
+        testButton.setStyle("-fx-background-color:"+colorS+"");
 
         colorStickyNoteAqua = new Button();
         colorStickyNoteAqua.setMaxSize(sizeOfButton,sizeOfButton);
