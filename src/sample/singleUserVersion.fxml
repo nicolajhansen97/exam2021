@@ -1,25 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SingleUserVersion">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900" prefWidth="1500" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SingleUserVersion">
    <top>
-      <Pane prefHeight="34.0" prefWidth="500.0" style="-fx-background-color: rgb(200,200,200);" BorderPane.alignment="CENTER">
+      <Pane prefHeight="51.0" prefWidth="1500.0" style="-fx-background-color: rgb(200,200,200);" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="388.0" layoutY="2.0" mnemonicParsing="false" onAction="#createNote" text="Create button" />
+            <Button layoutX="24.0" layoutY="13.0" mnemonicParsing="false" onAction="#createNote">
+               <graphic>
+                  <ImageView>
+                     <image>
+                        <Image url="@../Pictures/plus.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
          </children>
       </Pane>
    </top>
-   <center>
-      <Pane fx:id="pane" onMouseClicked="#startMethod" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
    <bottom>
       <ScrollPane prefHeight="300.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
@@ -27,4 +31,11 @@
          </content>
       </ScrollPane>
    </bottom>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="566.0" prefWidth="1500.0" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+   </center>
 </BorderPane>

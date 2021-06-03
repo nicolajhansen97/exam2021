@@ -4,6 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -18,6 +20,9 @@ public class SingleUserVersion {
     Pane pane;
 
     @FXML
+    ScrollBar scrollBar;
+
+    @FXML
     HBox hBox;
 
     @FXML
@@ -29,6 +34,7 @@ public class SingleUserVersion {
     int globalCountY = 0;
     final int noteSizeDifference = 250;
     int globalID = 1;
+
 
     EventHandler<ActionEvent> s = new EventHandler<ActionEvent>() {
         @Override
@@ -44,6 +50,7 @@ public class SingleUserVersion {
     @FXML
     public void createNote() {
         listTest.add(new StickyNote());
+
         if (globalCountX >pane.getWidth()) {
             globalCountX = 0;
         }else {
@@ -110,8 +117,14 @@ public class SingleUserVersion {
                     stickyNote.getStickyNote().setOnMouseDragged(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
-                            stickyNote.setCoordinate(event.getSceneX()-25,event.getSceneY()-50);
-                            stickyNote.update();
+                            //if ((stickyNote.getXCoordinate()>=-25 &&stickyNote.getXCoordinate() <=1500-250)
+                            //&& stickyNote.getYCoordinate()>=-50 &&stickyNote.getYCoordinate() <=550-225) {
+                                stickyNote.setCoordinate(event.getSceneX() - 25, event.getSceneY() - 50);
+                                stickyNote.update();
+                            //}else {
+                              //  stickyNote.setCoordinate(575,150);
+                              //  stickyNote.update();
+                            //}
                         }
                     });
                 }
