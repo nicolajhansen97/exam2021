@@ -12,8 +12,8 @@ import java.io.Serializable;
 public class StickyNote implements StickyNoteInterface, Serializable {
 
     private transient Color color = Color.YELLOW;
-    private transient String text;
-    private transient double x,y;
+    private String text,savedColor;
+    private double x,y;
     private int ID;
     private final double sizeOfStickyNote = 275;
     private final double sizeOfTextOnStickyNote = 200;
@@ -33,11 +33,6 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     public void setUpOrDown(boolean upOrDown){
         this.upOrDown = upOrDown;
     }
-
-    public StickyNote(){
-
-    }
-
 
     public Button getDeleteStickyNote(){
         return deleteStickyNote;
@@ -84,6 +79,21 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
         testButton.setStyle("-fx-background-color:"+colorS+"");
     }
+    //save one
+    public void saveColorToString(){
+        savedColor = getColorString();
+    }
+    //save two
+    public void saveText(){
+        assert false;
+        text = textOnStickyNote.getText();
+    }
+    //save three
+    public void saveCordinates(){
+        double x = getXCoordinate();
+        double y = getYCoordinate();
+    }
+
 
     public String getColorString(){
         return String.format("#%02x%02x%02x",
@@ -181,8 +191,6 @@ public class StickyNote implements StickyNoteInterface, Serializable {
 
     @Override
     public String getText() { return text;}
-
-    public void getText2() { this.text = textOnStickyNote.getText();}
 
     @Override
     public void setCoordinate(double x, double y) {

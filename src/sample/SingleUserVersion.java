@@ -83,14 +83,13 @@ public class SingleUserVersion {
         });
         saveEverything.setOnAction(e ->{
             Save.createTextFile();
-            try {
-                OutputStream os = Files.newOutputStream(Save.getFile().toPath());
-                ObjectOutputStream out = new ObjectOutputStream(os);
-                out.writeObject(StickyListSingleton.getInstance().getArray());
-            }catch(Exception ex){ex.printStackTrace();}
         });
-        loadBoard.setOnAction(e -> {
-            Load.loadThing();
+        loadBoard.setOnAction(e ->{
+            System.out.println("nothing yet");
+        });
+        loadEverything.setOnAction(e -> {
+            ArrayList<StickyNote> test = Load.getLoadThing();
+            System.out.println(test.get(0).getText());
         });
     }
 
@@ -129,7 +128,6 @@ public class SingleUserVersion {
                 public void handle(MouseEvent event) {
                     //delete
                     stickyNote.getDeleteStickyNote().setOnAction(s);
-                    StickyListSingleton.getInstance().getArray().remove(stickyNote);
                     //Test button
                     stickyNote.getTestButton().setOnAction(new EventHandler<ActionEvent>() {
                         @Override

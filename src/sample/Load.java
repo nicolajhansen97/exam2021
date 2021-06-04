@@ -34,15 +34,18 @@ public class Load implements LoadInterface{
 
     }
 
-    public static void loadThing(){
+    public static ArrayList<StickyNote> getLoadThing(){
+        ArrayList<StickyNote> notes = new ArrayList<>();
         try {
             InputStream in = Files.newInputStream(Load.LoadTextFile().toPath());
             ObjectInputStream ins = new ObjectInputStream(in);
-            ArrayList<StickyNote> notes = (ArrayList<StickyNote>) ins.readObject();
-            System.out.println(notes.size());
+            Object obj = ins.readObject();
+            notes = (ArrayList<StickyNote>) obj;
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        return notes;
     }
 
 

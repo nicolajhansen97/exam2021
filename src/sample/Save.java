@@ -3,13 +3,12 @@ package sample;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Save{
+public class Save {
 
     private static File file;
 
@@ -17,7 +16,8 @@ public class Save{
         return file.getName();
     }
 
-    public void setFilepath() {}
+    public void setFilepath() {
+    }
 
     public static void createTextFile() {
         final String sampleText = Board.getBoardText();
@@ -30,28 +30,34 @@ public class Save{
         //making a file
         file = s.showSaveDialog(new Stage());
         //creating a text file
+        for (int i = 0; i <StickyListSingleton.getInstance().getArray().size(); i++) {
+            StickyListSingleton.getInstance().getArray().get(i).saveCordinates();
+            StickyListSingleton.getInstance().getArray().get(i).saveText();
+            StickyListSingleton.getInstance().getArray().get(i).saveColorToString();
+        }
         if (file != null) {
-            saveTextToFile(sampleText, file);
+            try {
+                OutputStream os = Files.newOutputStream(Save.getFile().toPath());
+                ObjectOutputStream out = new ObjectOutputStream(os);
+                out.writeObject(StickyListSingleton.getInstance().getArray());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
         }
     }
 
-    public static File getFile(){return file;}
-
-    private static void saveTextToFile(String content, File file) {
-        try {
-            PrintWriter writer;
-            writer = new PrintWriter(file);
-            writer.println(content);
-            writer.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Save.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static File getFile() {
+        return file;
     }
 
-    public void overrideOldTextFile() {}
+    public void overrideOldTextFile() {
+    }
 
-    public void getName() {}
+    public void getName() {
+    }
 
-    public void setName() {}
+    public void setName() {
+    }
 
 }
