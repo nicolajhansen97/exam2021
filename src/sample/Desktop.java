@@ -22,9 +22,6 @@ public class Desktop implements DesktopInterface{
                 returnList.add(StickyListSingleton.getInstance().getArray().get(i));
             }
         }
-
-        System.out.println(StickyListSingleton.getInstance().getArray().get(0).getSomeText());
-
         return returnList;
 
     }
