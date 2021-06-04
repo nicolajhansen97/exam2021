@@ -1,11 +1,13 @@
 package sample;
 
+import java.util.ArrayList;
+
 public interface DesktopInterface {
     //create sticky note, search sticky notes, listview
 
     public void createStickyNotes();
 
-    public void searchStickyNotes(String searchCriteria);
+    public ArrayList searchStickyNotes(String searchCriteria);
 
     public void loadDesktopProject();
 

@@ -34,16 +34,25 @@ public class SingleUserVersion {
     @FXML
     MenuBar menuBar;
 
+    @FXML
+    Button butSearch;
+
+    @FXML
+    TextField searchField;
+
     StickyNote firstTest = new StickyNote();
-    ArrayList<StickyNote> listTest = new ArrayList<>();
+    //ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCountX = 0;
     int globalCountY = 0;
     final int noteSizeDifference = 250;
     int globalID = 1;
-
+    Desktop desktop = new Desktop();
+/*
     public ArrayList<StickyNote> getArraylist(){
         return listTest;
     }
+
+ */
     public void initialize(){
 
         Menu fileMenu = new Menu("Menu");
@@ -71,7 +80,7 @@ public class SingleUserVersion {
             try {
                 OutputStream os = new FileOutputStream(Save.getFileName());
                 ObjectOutputStream out = new ObjectOutputStream(os);
-                out.writeObject(listTest);
+                out.writeObject(StickyListSingleton.getInstance());
             }catch(Exception ex){ex.printStackTrace();}
         });
     }
@@ -89,20 +98,23 @@ public class SingleUserVersion {
 
     @FXML
     public void createNote() {
-        listTest.add(new StickyNote());
+        StickyListSingleton.getInstance().addToArray(new StickyNote());
 
         if (globalCountX > pane.getWidth()) {
             globalCountX = 0;
         } else {
-            listTest.get(listTest.size() - 1).setCoordinate(globalCountX, globalCountY);
+            StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).setCoordinate(globalCountX, globalCountY);
         }
-        listTest.get(listTest.size() - 1).setID(globalID++);
+        //listTest.get(listTest.size() - 1).setID(globalID++);
+        StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).setID(globalID++);
         globalCountX = globalCountX + noteSizeDifference;
-        System.out.println(listTest.get(listTest.size() - 1).getID());
+        //System.out.println(listTest.get(listTest.size() - 1).getID());
+        System.out.println(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).getID());
 
-        hBox.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
+        //hBox.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
+        hBox.getChildren().addAll(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).createPane());
 
-        for (StickyNote stickyNote : listTest) {
+        for (StickyNote stickyNote : StickyListSingleton.getInstance().getArray()) {
             stickyNote.getStickyNote().setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -173,6 +185,24 @@ public class SingleUserVersion {
         }
 
 
+    }
+
+    @FXML
+    public void searchButton (ActionEvent event) {
+        int i = 0;
+        ArrayList<StickyNote> tempSN = desktop.searchStickyNotes(searchField.getText());
+        //System.out.println(tempSN.size() + " " + listTest.size());
+        /*
+        for (StickyNote stickyNote : listTest) {
+            for (int j = 0; j < tempSN.size(); j++) {
+                if (!listTest.get(i).equals(){
+                    hBox.getChildren().remove(stickyNote);
+                    System.out.println("Test");
+                }
+            }
+        }
+
+         */
     }
 
     //Works but need something better
