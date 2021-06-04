@@ -10,7 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SingleUserVersion {
 
@@ -36,7 +40,9 @@ public class SingleUserVersion {
     final int noteSizeDifference = 250;
     int globalID = 1;
 
-
+    public ArrayList<StickyNote> getArraylist(){
+        return listTest;
+    }
     public void initialize(){
 
         Menu fileMenu = new Menu("Menu");
@@ -58,6 +64,14 @@ public class SingleUserVersion {
 
         menuClose.setOnAction(e -> {
          Board.closeProgram();
+        });
+        saveBoard.setOnAction(e -> {
+           Save.createTextFile();
+            try {
+                OutputStream os = new FileOutputStream(Save.getFileName());
+                ObjectOutputStream out = new ObjectOutputStream(os);
+                out.writeObject(listTest);
+            }catch(Exception ex){ex.printStackTrace();}
         });
     }
 
