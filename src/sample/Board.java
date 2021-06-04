@@ -13,7 +13,7 @@ public class Board {
         System.exit(0);
     }
 
-    static ArrayList<StickyNote> list = s.getArraylist();
+    static ArrayList<StickyNote> list = StickyListSingleton.getInstance().getArray();
 
     public static String getBoardText(){
         String string = "";

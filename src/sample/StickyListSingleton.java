@@ -1,8 +1,9 @@
 package sample;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class StickyListSingleton {
+public class StickyListSingleton implements Serializable {
 
     private static StickyListSingleton mInstance;
     private ArrayList<StickyNote> list = null;

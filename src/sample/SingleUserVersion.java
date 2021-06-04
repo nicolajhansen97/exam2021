@@ -10,10 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -61,9 +59,9 @@ public class SingleUserVersion {
         fileMenu.getItems().addAll(menuSettings,menuClose);
 
         Menu saveMenu = new Menu("Save");
-        MenuItem saveBoard = new MenuItem("Save board");
+        MenuItem saveDesktop = new MenuItem("Save Desktop");
         MenuItem saveEverything = new MenuItem("Save everything");
-        saveMenu.getItems().addAll(saveBoard,saveEverything);
+        saveMenu.getItems().addAll(saveDesktop,saveEverything);
 
         Menu loadMenu = new Menu("Load");
         MenuItem loadBoard = new MenuItem("Load board");
@@ -75,13 +73,24 @@ public class SingleUserVersion {
         menuClose.setOnAction(e -> {
          Board.closeProgram();
         });
-        saveBoard.setOnAction(e -> {
+        saveDesktop.setOnAction(e -> {
            Save.createTextFile();
             try {
-                OutputStream os = new FileOutputStream(Save.getFileName());
+                OutputStream os = Files.newOutputStream(Save.getFile().toPath());
                 ObjectOutputStream out = new ObjectOutputStream(os);
-                out.writeObject(StickyListSingleton.getInstance());
+                out.writeObject(hBox.getChildren());
             }catch(Exception ex){ex.printStackTrace();}
+        });
+        saveEverything.setOnAction(e ->{
+            Save.createTextFile();
+            try {
+                OutputStream os = Files.newOutputStream(Save.getFile().toPath());
+                ObjectOutputStream out = new ObjectOutputStream(os);
+                out.writeObject(StickyListSingleton.getInstance().getArray());
+            }catch(Exception ex){ex.printStackTrace();}
+        });
+        loadBoard.setOnAction(e -> {
+            Load.loadThing();
         });
     }
 
@@ -120,6 +129,7 @@ public class SingleUserVersion {
                 public void handle(MouseEvent event) {
                     //delete
                     stickyNote.getDeleteStickyNote().setOnAction(s);
+                    StickyListSingleton.getInstance().getArray().remove(stickyNote);
                     //Test button
                     stickyNote.getTestButton().setOnAction(new EventHandler<ActionEvent>() {
                         @Override

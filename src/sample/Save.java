@@ -33,8 +33,9 @@ public class Save{
         if (file != null) {
             saveTextToFile(sampleText, file);
         }
-
     }
+
+    public static File getFile(){return file;}
 
     private static void saveTextToFile(String content, File file) {
         try {
