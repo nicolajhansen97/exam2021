@@ -114,7 +114,7 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         colorPictures[5] = new ImageView(colorPicture[5]);
         colorPicture[6] = new Image("Pictures/UP.png");
         colorPictures[6] = new ImageView(colorPicture[6]);
-        testButton.setGraphic(colorPictures[5]);
+        testButton.setGraphic(colorPictures[6]);
         testButton.setPrefSize(prefIconSize,prefIconSize);
         testButton.setStyle("-fx-background-color:"+colorS+"");
 

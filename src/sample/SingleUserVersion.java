@@ -100,7 +100,7 @@ public class SingleUserVersion {
         globalCountX = globalCountX + noteSizeDifference;
         System.out.println(listTest.get(listTest.size() - 1).getID());
 
-        pane.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
+        hBox.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
 
         for (StickyNote stickyNote : listTest) {
             stickyNote.getStickyNote().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -112,14 +112,14 @@ public class SingleUserVersion {
                     stickyNote.getTestButton().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            if (!stickyNote.getUpOrDown()){
+                            if (stickyNote.getUpOrDown()){
                                 hBox.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getUp());
-                                stickyNote.setUpOrDown(true);
+                                stickyNote.setUpOrDown(false);
                             } else {
                                 pane.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getDown());
-                                stickyNote.setUpOrDown(false);
+                                stickyNote.setUpOrDown(true);
 
                             }
                             stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
