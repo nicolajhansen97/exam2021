@@ -14,22 +14,19 @@ public class Desktop implements DesktopInterface{
 
     @Override
     public ArrayList<StickyNote> searchStickyNotes(String searchCriteria) {
-        /*
-        SingleUserVersion a = new SingleUserVersion();
+
         ArrayList<StickyNote> returnList = new ArrayList<>();
 
-        System.out.println(a.getArraylist().size());
-
-        for (int i = 0; i < a.getArraylist().size(); i++) {
-            if(a.getArraylist().get(i).getText().contains(searchCriteria.toLowerCase())){
-                returnList.add(a.getArraylist().get(i));
+        for (int i = 0; i < StickyListSingleton.getInstance().getArray().size(); i++) {
+            if (StickyListSingleton.getInstance().getArray().get(i).getSomeText().toLowerCase().contains(searchCriteria.toLowerCase())) {
+                returnList.add(StickyListSingleton.getInstance().getArray().get(i));
             }
         }
 
+        System.out.println(StickyListSingleton.getInstance().getArray().get(0).getSomeText());
+
         return returnList;
 
-         */
-        return null;
     }
 
 

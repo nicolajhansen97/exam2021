@@ -6,11 +6,13 @@ import java.util.ArrayList;
 public class StickyListSingleton implements Serializable {
 
     private static StickyListSingleton mInstance;
-    private ArrayList<StickyNote> list = null;
+    private ArrayList<StickyNote> list;
 
     public static StickyListSingleton getInstance() {
-        if(mInstance == null)
+        if(mInstance == null) {
             mInstance = new StickyListSingleton();
+            System.out.println("New Instance is made");
+        }
 
         return mInstance;
     }

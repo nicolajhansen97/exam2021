@@ -10,7 +10,7 @@ public interface StickyNoteInterface {
     public Color getColor();
 
     public void setText(String text);
-    public String getText();
+    public String getSomeText();
 
     public void setCoordinate(double x,double y);
     public double getXCoordinate();

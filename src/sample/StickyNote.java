@@ -20,6 +20,7 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     private final double sizeOfButton = 30;
     public final double prefIconSize = 25;
     private boolean upOrDown = false;
+    public boolean deleted = false;
     private transient Pane stickyNote;
     private transient TextArea textOnStickyNote;
     private transient Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
@@ -190,7 +191,10 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     }
 
     @Override
-    public String getText() { return text;}
+    public String getSomeText() {
+        text = textOnStickyNote.getText();
+        return text;
+    }
 
     @Override
     public void setCoordinate(double x, double y) {
@@ -211,4 +215,12 @@ public class StickyNote implements StickyNoteInterface, Serializable {
 
     @Override
     public int getID() { return ID;}
+
+    public boolean isDelete(){
+        return deleted;
+    }
+
+    public void setIsDelete(boolean isThisDeleted){
+        this.deleted = isThisDeleted;
+    }
 }
