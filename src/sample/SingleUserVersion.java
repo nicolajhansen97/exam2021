@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -89,7 +90,7 @@ public class SingleUserVersion {
         });
         loadEverything.setOnAction(e -> {
             ArrayList<StickyNote> test = Load.getLoadThing();
-            System.out.println(test.get(0).getSomeText());
+            //System.out.println(test.get(0).getText());
         });
     }
 
@@ -196,21 +197,16 @@ public class SingleUserVersion {
     }
 
     @FXML
-    public void searchButton (ActionEvent event) {
-        int i = 0;
+    public void searchButton (KeyEvent event) {
         ArrayList<StickyNote> tempSN = desktop.searchStickyNotes(searchField.getText());
-        //System.out.println(tempSN.size() + " " + listTest.size());
-        /*
-        for (StickyNote stickyNote : listTest) {
-            for (int j = 0; j < tempSN.size(); j++) {
-                if (!listTest.get(i).equals(){
-                    hBox.getChildren().remove(stickyNote);
-                    System.out.println("Test");
-                }
+        hBox.getChildren().clear();
+        for (StickyNote stickyNote : tempSN) {
+            if(!pane.getChildren().contains(stickyNote.getStickyNote())){
+                hBox.getChildren().add(stickyNote.getStickyNote());
             }
+
         }
 
-         */
     }
 
     //Works but need something better
