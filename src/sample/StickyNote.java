@@ -7,22 +7,32 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class StickyNote implements StickyNoteInterface {
+import java.io.Serializable;
 
-    private Color color = Color.YELLOW;
+public class StickyNote implements StickyNoteInterface, Serializable {
+
+    private transient Color color = Color.YELLOW;
     private String text;
-    private double x,y;
+    private transient double x,y;
     private int ID;
     private final double sizeOfStickyNote = 275;
     private final double sizeOfTextOnStickyNote = 200;
     private final double sizeOfButton = 30;
     public final double prefIconSize = 25;
-    private Pane stickyNote;
-    private TextArea textOnStickyNote;
-    private Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
+    private boolean upOrDown = false;
+    private transient Pane stickyNote;
+    private transient TextArea textOnStickyNote;
+    private transient Button deleteStickyNote,colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
     testButton;
-    private ImageView[] colorPictures = new ImageView[7];
-    private Image[] colorPicture = new Image[7];
+    private transient ImageView[] colorPictures = new ImageView[7];
+    private transient Image[] colorPicture = new Image[7];
+
+    public boolean getUpOrDown(){
+        return upOrDown;
+    }
+    public void setUpOrDown(boolean upOrDown){
+        this.upOrDown = upOrDown;
+    }
 
     public Button getDeleteStickyNote(){
         return deleteStickyNote;
@@ -74,13 +84,18 @@ public class StickyNote implements StickyNoteInterface {
         testButton.setStyle("-fx-background-color:"+colorS+"");
     }
 
-    public Pane createPane(){
-        stickyNote = new Pane();
-
-        String colorS = String.format("#%02x%02x%02x",
+    public String getColorString(){
+        return String.format("#%02x%02x%02x",
                 (int) (255 * color.getRed()),
                 (int) (255 * color.getGreen()),
                 (int) (255 * color.getBlue()));
+    }
+
+
+    public Pane createPane(){
+        stickyNote = new Pane();
+
+        String colorS = getColorString();
 
         deleteStickyNote = new Button();
         deleteStickyNote.setMaxSize(sizeOfButton,sizeOfButton);
@@ -103,49 +118,11 @@ public class StickyNote implements StickyNoteInterface {
         testButton.setPrefSize(prefIconSize,prefIconSize);
         testButton.setStyle("-fx-background-color:"+colorS+"");
 
-        colorStickyNoteAqua = new Button();
-        colorStickyNoteAqua.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNoteAqua.setLayoutX(0);
-        colorPicture[0] = new Image("Pictures/AquaProject.png");
-        colorPictures[0] = new ImageView(colorPicture[0]);
-        colorPictures[0].setFitHeight(prefIconSize);
-        colorPictures[0].setFitWidth(prefIconSize);
-        colorStickyNoteAqua.setPrefSize(prefIconSize,prefIconSize);
-        colorStickyNoteAqua.setGraphic(colorPictures[0]);
-        colorStickyNoteAqua.setStyle("-fx-background-color:"+colorS+"");
-
-        colorStickyNotePurple = new Button();
-        colorStickyNotePurple.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNotePurple.setLayoutX(50);
-        colorPicture[1] = new Image("Pictures/PurpleProject.png");
-        colorPictures[1] = new ImageView(colorPicture[1]);
-        colorPictures[1].setFitHeight(prefIconSize);
-        colorPictures[1].setFitWidth(prefIconSize);
-        colorStickyNotePurple.setPrefSize(prefIconSize,prefIconSize);
-        colorStickyNotePurple.setGraphic(colorPictures[1]);
-        colorStickyNotePurple.setStyle("-fx-background-color:"+colorS+"");
-
-        colorStickyNoteRed = new Button();
-        colorStickyNoteRed.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNoteRed.setLayoutX(100);
-        colorPicture[2] = new Image("Pictures/RedProject.png");
-        colorPictures[2] = new ImageView(colorPicture[2]);
-        colorPictures[2].setFitHeight(prefIconSize);
-        colorPictures[2].setFitWidth(prefIconSize);
-        colorStickyNoteRed.setPrefSize(prefIconSize,prefIconSize);
-        colorStickyNoteRed.setGraphic(colorPictures[2]);
-        colorStickyNoteRed.setStyle("-fx-background-color:"+colorS+"");
-
-        colorStickyNoteYellow = new Button();
-        colorStickyNoteYellow.setMaxSize(sizeOfButton,sizeOfButton);
-        colorStickyNoteYellow.setLayoutX(150);
-        colorPicture[3] = new Image("Pictures/YellowProject.png");
-        colorPictures[3] = new ImageView(colorPicture[3]);
-        colorPictures[3].setFitWidth(prefIconSize);
-        colorPictures[3].setFitHeight(prefIconSize);
-        colorStickyNoteYellow.setPrefSize(prefIconSize,prefIconSize);
-        colorStickyNoteYellow.setGraphic(colorPictures[3]);
-        colorStickyNoteYellow.setStyle("-fx-background-color:"+colorS+"");
+        //calls createButton method
+        colorStickyNoteAqua = createButton("Pictures/AquaProject.png",0);
+        colorStickyNotePurple= createButton("Pictures/PurpleProject.png",35);
+        colorStickyNoteRed = createButton("Pictures/RedProject.png",70);
+        colorStickyNoteYellow = createButton("Pictures/YellowProject.png",105);
 
         textOnStickyNote = new TextArea();
         textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
@@ -164,6 +141,28 @@ public class StickyNote implements StickyNoteInterface {
         stickyNote.setStyle("-fx-background-color: "+colorS+"");
 
         return stickyNote;
+    }
+
+
+    /***
+     *
+     * @param url
+     * @return
+     */
+    public Button createButton(String url,int location){
+        Button button = new Button();
+        button.setMaxSize(sizeOfButton,sizeOfButton);
+        button.setLayoutX(location);
+        //picture
+        Image picture = new Image(url);
+        ImageView imageViews = new ImageView(picture);
+        imageViews.setFitHeight(prefIconSize);
+        imageViews.setFitWidth(prefIconSize);
+        //rest of button
+        button.setPrefSize(prefIconSize,prefIconSize);
+        button.setGraphic(imageViews);
+        button.setStyle("-fx-background-color:"+getColorString()+"");
+        return button;
     }
 
     @Override

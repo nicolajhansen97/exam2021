@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -86,7 +87,6 @@ public class SingleUserVersion {
         }
     };
 
-
     @FXML
     public void createNote() {
         listTest.add(new StickyNote());
@@ -112,16 +112,17 @@ public class SingleUserVersion {
                     stickyNote.getTestButton().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
-                            try {
+                            if (!stickyNote.getUpOrDown()){
                                 hBox.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getUp());
-                                stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
-                            } catch (Exception e) {
+                                stickyNote.setUpOrDown(true);
+                            } else {
                                 pane.getChildren().add(stickyNote.getStickyNote());
                                 stickyNote.getTestButton().setGraphic(stickyNote.getDown());
-                                stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
+                                stickyNote.setUpOrDown(false);
 
                             }
+                            stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
                         }
                     });
                     //Change Color
