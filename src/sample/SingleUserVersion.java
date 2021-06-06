@@ -34,7 +34,7 @@ public class SingleUserVersion {
     MenuBar menuBar;
 
     @FXML
-    Button butSearch;
+    Button butSearch, testButton;
 
     @FXML
     TextField searchField;
@@ -46,6 +46,7 @@ public class SingleUserVersion {
     final int noteSizeDifference = 250;
     int globalID = 1;
     Desktop desktop = new Desktop();
+    Database button = new Database();
 /*
     public ArrayList<StickyNote> getArraylist(){
         return listTest;
@@ -223,5 +224,10 @@ public class SingleUserVersion {
         });
 
          */
+    }
+    public void save (ActionEvent event){
+
+        button.saveDatabase();
+
     }
 }

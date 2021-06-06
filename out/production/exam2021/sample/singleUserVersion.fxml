@@ -25,6 +25,7 @@
                </graphic></Button>
             <MenuBar fx:id="menuBar" layoutY="8.0" prefHeight="42.0" prefWidth="267.0" style="-fx-background-color: rgb(200,200,200);" />
             <TextField fx:id="searchField" layoutX="1194.0" layoutY="12.0" onKeyReleased="#searchButton" />
+            <Button fx:id="testButton" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#save" text="Button" />
          </children>
       </Pane>
    </top>
