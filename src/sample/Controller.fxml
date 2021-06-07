@@ -27,6 +27,7 @@
             <TextField fx:id="searchField" layoutX="1194.0" layoutY="12.0" onKeyReleased="#searchButton" />
             <Button fx:id="testButton" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#save" text="Button" />
             <Button fx:id="testButtonLoad" layoutX="566.0" layoutY="15.0" mnemonicParsing="false" onAction="#load" text="load" />
+            <Button fx:id="tes" layoutX="649.0" layoutY="13.0" mnemonicParsing="false" onAction="#getINFO" text="GetID" />
          </children>
       </Pane>
    </top>

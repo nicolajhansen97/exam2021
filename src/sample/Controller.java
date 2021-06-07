@@ -16,6 +16,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Controller {
 
@@ -35,7 +36,7 @@ public class Controller {
     MenuBar menuBar;
 
     @FXML
-    Button butSearch, testButton;
+    Button butSearch, testButton, tes;
 
     @FXML
     TextField searchField;
@@ -49,6 +50,7 @@ public class Controller {
     boolean versionControl;
     Desktop desktop = new Desktop();
     Database button = new Database();
+    int idToBeDeleted, largestID;
 
     /*
         public ArrayList<StickyNote> getArraylist(){
@@ -161,11 +163,12 @@ public class Controller {
 
 
 
-    public void makeNote(boolean upOrDown,double x,double y,Color color,String text,StickyNote stickyNote){
+    public void makeNote(boolean upOrDown,double x,double y,Color color,String text, int id,StickyNote stickyNote){
         stickyNote.setUpOrDown(upOrDown);
         stickyNote.setCoordinate(x,y);
         stickyNote.setColor(color);
         stickyNote.setText(text);
+        stickyNote.setID(id);
         if (stickyNote.getUpOrDown()){
             pane.getChildren().add(stickyNote.getStickyNote());
         }
@@ -177,7 +180,7 @@ public class Controller {
             test2.add(new StickyNote());
             hBox.getChildren().add(test2.get(i).createPane());
             makeNote(test.get(i).getUpOrDown(),test.get(i).getXCoordinate(),test.get(i).getYCoordinate(),
-                    Color.web(test.get(i).getSavedColor()),test.get(i).getSavedText(),test2.get(i));
+                    Color.web(test.get(i).getSavedColor()),test.get(i).getSavedText(), test.get(i).getID(),test2.get(i));
             test2.get(i).update();
         }
         return test2;
@@ -196,6 +199,7 @@ public class Controller {
             Pane p = (Pane) b.getParent();
             Pane p2 = (Pane) p.getParent();
             p2.getChildren().remove(p);
+            StickyListSingleton.getInstance().getArray().remove(idToBeDeleted);
         }
     };
 
@@ -206,6 +210,7 @@ public class Controller {
                 public void handle(MouseEvent event) {
                     //delete
                     stickyNote.getDeleteStickyNote().setOnAction(s);
+                    idToBeDeleted = test.indexOf(stickyNote);
                     //Test button
                     stickyNote.getTestButton().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
@@ -319,9 +324,8 @@ public class Controller {
          */
     }
     public void save (ActionEvent event){
-
+        globalID = largestID;
         button.saveDatabase();
-
     }
     public void load (ActionEvent event){
         System.out.println("IM IN");
@@ -329,6 +333,19 @@ public class Controller {
         deleteNotes();
         StickyListSingleton.getInstance().getArray().addAll(makeNotes(button.getTempStickyNote()));
         doStuff(StickyListSingleton.getInstance().getArray());
+        findLargestID();
+        globalID = largestID;
+    }
 
+    public void getINFO(ActionEvent event){
+        System.out.println(StickyListSingleton.getInstance().getArray().get(0).getID());
+        System.out.println(StickyListSingleton.getInstance().getArray().get(1).getID());
+        System.out.println(StickyListSingleton.getInstance().getArray().get(2).getID());
+    }
+
+    public void findLargestID(){
+        Collections.sort(StickyListSingleton.getInstance().getArray(), new IDComparator());
+        largestID = StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).getID()+1;
+        System.out.println(largestID);
     }
 }
