@@ -47,13 +47,49 @@ public class Controller {
     int globalID = 1;
     Desktop desktop = new Desktop();
     Database button = new Database();
-/*
-    public ArrayList<StickyNote> getArraylist(){
-        return listTest;
-    }
 
- */
-    public void initialize(){
+    /*
+        public ArrayList<StickyNote> getArraylist(){
+            return listTest;
+        }
+
+     */
+    public void initialize() throws IOException {
+
+        File programVersion = new File("C:\\Users\\Bruger\\Desktop\\Sticky Note\\Program.txt");
+        boolean programVer;
+
+        if (programVersion.exists() && programVersion.isFile()) {
+            System.out.println("Filen eksisterer allerede!");
+
+            BufferedReader reader = new BufferedReader(new FileReader(programVersion));
+            String version = reader.readLine();
+            System.out.println(version);
+
+            if (version.equals("0"))
+            {
+                System.out.println("You now use single version <3");
+            }
+            else if (version.equals("1"))
+            {
+                System.out.println("You now use multi version <3");
+            }
+            else
+            {
+                System.out.println("Ops! Something wierd happen, how you ended here?");
+            }
+
+
+        }
+
+
+        else {
+            programVersion.getParentFile().mkdirs();
+            FileWriter writer = new FileWriter(programVersion);
+            writer.write("0");
+            writer.close();
+            System.out.println("Filen blev lavet");
+        }
 
         Menu fileMenu = new Menu("Menu");
         MenuItem menuSettings = new MenuItem("Settings");
