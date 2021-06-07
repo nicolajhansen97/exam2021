@@ -11,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class Controller {
      */
     public void initialize() throws IOException {
 
-        File programVersion = new File("C:\\Users\\Bruger\\Desktop\\Sticky Note\\Program.txt");
+        File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath())+"\\Sticky Note\\Program.txt");
         boolean programVer;
 
         if (programVersion.exists() && programVersion.isFile()) {
