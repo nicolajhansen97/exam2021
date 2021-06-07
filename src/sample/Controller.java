@@ -323,4 +323,12 @@ public class Controller {
         button.saveDatabase();
 
     }
+    public void load (ActionEvent event){
+        System.out.println("IM IN");
+        button.loadDatabase();
+        deleteNotes();
+        StickyListSingleton.getInstance().getArray().addAll(makeNotes(button.getTempStickyNote()));
+        doStuff(StickyListSingleton.getInstance().getArray());
+
+    }
 }
