@@ -26,6 +26,7 @@
             <MenuBar fx:id="menuBar" layoutY="8.0" prefHeight="42.0" prefWidth="267.0" style="-fx-background-color: rgb(200,200,200);" />
             <TextField fx:id="searchField" layoutX="1194.0" layoutY="12.0" onKeyReleased="#searchButton" />
             <Button fx:id="testButton" layoutX="463.0" layoutY="15.0" mnemonicParsing="false" onAction="#save" text="Button" />
+            <Button fx:id="testButtonLoad" layoutX="566.0" layoutY="15.0" mnemonicParsing="false" onAction="#load" text="load" />
          </children>
       </Pane>
    </top>
@@ -39,7 +40,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="566.0" prefWidth="1500.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="pane" onDragDetected="#load" prefHeight="200.0" prefWidth="200.0" />
          </content>
       </ScrollPane>
    </center>

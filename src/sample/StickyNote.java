@@ -82,6 +82,14 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
         testButton.setStyle("-fx-background-color:"+colorS+"");
     }
+
+    public void setSavedText (String text){
+        this.savedText = text;
+    }
+
+    public void setColorToString(String color){
+        this.savedColor = color;
+    }
     //save one
     public void saveColorToString(){
         this.savedColor = getColorString();
@@ -233,4 +241,5 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     public void setIsDelete(boolean isThisDeleted){
         this.deleted = isThisDeleted;
     }
+
 }

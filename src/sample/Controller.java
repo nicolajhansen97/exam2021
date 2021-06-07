@@ -34,7 +34,7 @@ public class Controller {
     MenuBar menuBar;
 
     @FXML
-    Button butSearch, testButton;
+    Button butSearch, testButton, testButtonLoad;
 
     @FXML
     TextField searchField;
@@ -55,7 +55,7 @@ public class Controller {
 
      */
     public void initialize() throws IOException {
-
+/*
         File programVersion = new File("C:\\Users\\Bruger\\Desktop\\Sticky Note\\Program.txt");
         boolean programVer;
 
@@ -91,6 +91,8 @@ public class Controller {
             System.out.println("Filen blev lavet");
         }
 
+
+ */
         Menu fileMenu = new Menu("Menu");
         MenuItem menuSettings = new MenuItem("Settings");
         MenuItem menuClose = new MenuItem("Close");
@@ -144,6 +146,7 @@ public class Controller {
     }
 
     public ArrayList<StickyNote> makeNotes(ArrayList<StickyNote> test){
+        System.out.println("IM IN 2");
         ArrayList<StickyNote> test2 = new ArrayList<>();
         for (int i = 0; i <test.size(); i++) {
             test2.add(new StickyNote());
@@ -291,8 +294,15 @@ public class Controller {
          */
     }
     public void save (ActionEvent event){
-
         button.saveDatabase();
+    }
+
+    public void load (ActionEvent event){
+        System.out.println("IM IN");
+        button.loadDatabase();
+        deleteNotes();
+        StickyListSingleton.getInstance().getArray().addAll(makeNotes(button.getTempStickyNote()));
+        doStuff(StickyListSingleton.getInstance().getArray());
 
     }
 }
