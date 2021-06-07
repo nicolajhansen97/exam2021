@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class StickyNote implements StickyNoteInterface, Serializable {
 
     private transient Color color = Color.YELLOW;
-    private String text,savedColor;
+    private String text ="",savedColor;
     private double x,y;
     private int ID;
     private final double sizeOfStickyNote = 275;
