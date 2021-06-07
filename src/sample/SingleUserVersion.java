@@ -205,9 +205,7 @@ public class SingleUserVersion {
             if(!pane.getChildren().contains(stickyNote.getStickyNote())){
                 hBox.getChildren().add(stickyNote.getStickyNote());
             }
-
         }
-
     }
 
     //Works but need something better
