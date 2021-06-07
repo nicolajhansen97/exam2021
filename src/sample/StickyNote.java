@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class StickyNote implements StickyNoteInterface, Serializable {
 
     private transient Color color = Color.YELLOW;
-    private String text ="",savedColor;
+    private String text = "",savedColor,savedText;
     private double x,y;
     private int ID;
     private final double sizeOfStickyNote = 275;
@@ -88,7 +88,7 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     //save two
     public void saveText(){
         assert false;
-        this.text = textOnStickyNote.getText();
+        this.savedText = textOnStickyNote.getText();
     }
     //save three
     public void saveCoordinates(){
@@ -96,8 +96,8 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         double y = getYCoordinate();
     }
 
-    public String getText(){
-        return text;
+    public String getSavedText(){
+        return this.savedText;
     }
     public String getSavedColor(){
         return savedColor;
@@ -143,7 +143,7 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         colorStickyNoteRed = createButton("Pictures/RedProject.png",70);
         colorStickyNoteYellow = createButton("Pictures/YellowProject.png",105);
 
-        textOnStickyNote = new TextArea(getText());
+        textOnStickyNote = new TextArea(getSavedText());
         textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
         textOnStickyNote.setLayoutX((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
         textOnStickyNote.setLayoutY((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);

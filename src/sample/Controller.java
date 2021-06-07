@@ -91,24 +91,39 @@ public class Controller {
         });
         loadEverything.setOnAction(e -> {
             ArrayList<StickyNote> test = Load.getLoadThing();
-            ArrayList<StickyNote> test2 = new ArrayList<>();
-            for (int i = 0; i <test.size(); i++) {
-                test2.add(new StickyNote());
-                hBox.getChildren().add(test2.get(i).createPane());
-
-                test2.get(i).setUpOrDown(test.get(i).getUpOrDown());
-                test2.get(i).setCoordinate(test.get(i).getXCoordinate(),test.get(i).getYCoordinate());
-                test2.get(i).setColor(Color.web(test.get(i).getSavedColor()));
-                test2.get(i).setText(test.get(i).getText());
-                if (test2.get(i).getUpOrDown()){
-                    pane.getChildren().add(test2.get(i).getStickyNote());
-                }
-                test2.get(i).update();
-                doStuff(test2);
-            }
+            deleteNotes();
+            StickyListSingleton.getInstance().getArray().addAll(makeNotes(test));
+            doStuff(StickyListSingleton.getInstance().getArray());
         });
     }
 
+    public void makeNote(boolean upOrDown,double x,double y,Color color,String text,StickyNote stickyNote){
+        stickyNote.setUpOrDown(upOrDown);
+        stickyNote.setCoordinate(x,y);
+        stickyNote.setColor(color);
+        stickyNote.setText(text);
+        if (stickyNote.getUpOrDown()){
+            pane.getChildren().add(stickyNote.getStickyNote());
+        }
+    }
+
+    public ArrayList<StickyNote> makeNotes(ArrayList<StickyNote> test){
+        ArrayList<StickyNote> test2 = new ArrayList<>();
+        for (int i = 0; i <test.size(); i++) {
+            test2.add(new StickyNote());
+            hBox.getChildren().add(test2.get(i).createPane());
+            makeNote(test.get(i).getUpOrDown(),test.get(i).getXCoordinate(),test.get(i).getYCoordinate(),
+                    Color.web(test.get(i).getSavedColor()),test.get(i).getSavedText(),test2.get(i));
+            test2.get(i).update();
+        }
+        return test2;
+    }
+
+    public void deleteNotes(){
+        StickyListSingleton.getInstance().getArray().clear();
+        pane.getChildren().clear();
+        hBox.getChildren().clear();
+    }
 
     EventHandler<ActionEvent> s = new EventHandler<ActionEvent>() {
         @Override
