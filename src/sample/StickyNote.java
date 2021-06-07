@@ -13,7 +13,8 @@ import java.io.Serializable;
 public class StickyNote implements StickyNoteInterface, Serializable {
 
     private transient Color color = Color.YELLOW;
-    private String text = "",savedColor,savedText;
+    private String savedColor;
+    private String savedText = "";
     private double x,y;
     private int ID;
     private final double sizeOfStickyNote = 275;
@@ -202,8 +203,7 @@ public class StickyNote implements StickyNoteInterface, Serializable {
 
     @Override
     public String getSomeText() {
-        text = textOnStickyNote.getText();
-        return text;
+        return textOnStickyNote.getText();
     }
 
     @Override
