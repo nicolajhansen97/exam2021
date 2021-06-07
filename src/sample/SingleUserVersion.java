@@ -91,7 +91,21 @@ public class SingleUserVersion {
         });
         loadEverything.setOnAction(e -> {
             ArrayList<StickyNote> test = Load.getLoadThing();
-            //System.out.println(test.get(0).getText());
+            ArrayList<StickyNote> test2 = new ArrayList<>();
+            for (int i = 0; i <test.size(); i++) {
+                test2.add(new StickyNote());
+                hBox.getChildren().add(test2.get(i).createPane());
+
+                test2.get(i).setUpOrDown(test.get(i).getUpOrDown());
+                test2.get(i).setCoordinate(test.get(i).getXCoordinate(),test.get(i).getYCoordinate());
+                test2.get(i).setColor(Color.web(test.get(i).getSavedColor()));
+                test2.get(i).setText(test.get(i).getText());
+                if (test2.get(i).getUpOrDown()){
+                    pane.getChildren().add(test2.get(i).getStickyNote());
+                }
+                test2.get(i).update();
+                doStuff(test2);
+            }
         });
     }
 
@@ -106,25 +120,8 @@ public class SingleUserVersion {
         }
     };
 
-    @FXML
-    public void createNote() {
-        StickyListSingleton.getInstance().addToArray(new StickyNote());
-
-        if (globalCountX > pane.getWidth()) {
-            globalCountX = 0;
-        } else {
-            StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).setCoordinate(globalCountX, globalCountY);
-        }
-        //listTest.get(listTest.size() - 1).setID(globalID++);
-        StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).setID(globalID++);
-        globalCountX = globalCountX + noteSizeDifference;
-        //System.out.println(listTest.get(listTest.size() - 1).getID());
-        System.out.println(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).getID());
-
-        //hBox.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
-        hBox.getChildren().addAll(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).createPane());
-
-        for (StickyNote stickyNote : StickyListSingleton.getInstance().getArray()) {
+    public void doStuff(ArrayList<StickyNote> test){
+        for (StickyNote stickyNote : test) {
             stickyNote.getStickyNote().setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -193,8 +190,27 @@ public class SingleUserVersion {
                 }
             });
         }
+    }
 
+    @FXML
+    public void createNote() {
+        StickyListSingleton.getInstance().addToArray(new StickyNote());
 
+        if (globalCountX > pane.getWidth()) {
+            globalCountX = 0;
+        } else {
+            StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).setCoordinate(globalCountX, globalCountY);
+        }
+        //listTest.get(listTest.size() - 1).setID(globalID++);
+        StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).setID(globalID++);
+        globalCountX = globalCountX + noteSizeDifference;
+        //System.out.println(listTest.get(listTest.size() - 1).getID());
+        System.out.println(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).getID());
+
+        //hBox.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
+        hBox.getChildren().addAll(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).createPane());
+
+        doStuff(StickyListSingleton.getInstance().getArray());
     }
 
     @FXML

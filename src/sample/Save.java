@@ -5,8 +5,6 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Save {
 
@@ -31,7 +29,7 @@ public class Save {
         file = s.showSaveDialog(new Stage());
         //creating a text file
         for (int i = 0; i <StickyListSingleton.getInstance().getArray().size(); i++) {
-            StickyListSingleton.getInstance().getArray().get(i).saveCordinates();
+            StickyListSingleton.getInstance().getArray().get(i).saveCoordinates();
             StickyListSingleton.getInstance().getArray().get(i).saveText();
             StickyListSingleton.getInstance().getArray().get(i).saveColorToString();
         }

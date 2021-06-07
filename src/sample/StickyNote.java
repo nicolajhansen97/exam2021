@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -82,19 +83,25 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     }
     //save one
     public void saveColorToString(){
-        savedColor = getColorString();
+        this.savedColor = getColorString();
     }
     //save two
     public void saveText(){
         assert false;
-        text = textOnStickyNote.getText();
+        this.text = textOnStickyNote.getText();
     }
     //save three
-    public void saveCordinates(){
+    public void saveCoordinates(){
         double x = getXCoordinate();
         double y = getYCoordinate();
     }
 
+    public String getText(){
+        return text;
+    }
+    public String getSavedColor(){
+        return savedColor;
+    }
 
     public String getColorString(){
         return String.format("#%02x%02x%02x",
@@ -136,13 +143,13 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         colorStickyNoteRed = createButton("Pictures/RedProject.png",70);
         colorStickyNoteYellow = createButton("Pictures/YellowProject.png",105);
 
-        textOnStickyNote = new TextArea();
+        textOnStickyNote = new TextArea(getText());
         textOnStickyNote.setMaxSize(sizeOfTextOnStickyNote,sizeOfTextOnStickyNote);
         textOnStickyNote.setLayoutX((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
         textOnStickyNote.setLayoutY((sizeOfStickyNote-sizeOfTextOnStickyNote)/2);
         textOnStickyNote.setWrapText(true);
-        textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
 
+        textOnStickyNote.setStyle("-fx-control-inner-background:"+colorS+"");
         stickyNote.getChildren().addAll(deleteStickyNote,textOnStickyNote,
                 colorStickyNoteAqua,colorStickyNotePurple,colorStickyNoteRed,colorStickyNoteYellow,
                 testButton);
@@ -180,6 +187,9 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     @Override
     public void setColor(Color color) {
         this.color = color;
+    }
+    public void setColorFromSavedInfo() {
+        this.color = Color.web(getSavedColor());
     }
 
     @Override
