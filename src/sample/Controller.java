@@ -46,6 +46,7 @@ public class Controller {
     int globalCountY = 0;
     final int noteSizeDifference = 250;
     int globalID = 1;
+    boolean versionControl;
     Desktop desktop = new Desktop();
     Database button = new Database();
 
@@ -57,8 +58,7 @@ public class Controller {
      */
     public void initialize() throws IOException {
 
-        File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath())+"\\Sticky Note\\Program.txt");
-        boolean programVer;
+        File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()) + "\\Sticky Note\\Program.txt");
 
         if (programVersion.exists() && programVersion.isFile()) {
             System.out.println("Filen eksisterer allerede!");
@@ -67,24 +67,16 @@ public class Controller {
             String version = reader.readLine();
             System.out.println(version);
 
-            if (version.equals("0"))
-            {
-                System.out.println("You now use single version <3");
-            }
-            else if (version.equals("1"))
-            {
-                System.out.println("You now use multi version <3");
-            }
-            else
-            {
+            if (version.equals("0")) {
+                versionControl = false;
+
+            } else if (version.equals("1")) {
+               versionControl = true;
+            } else {
                 System.out.println("Ops! Something wierd happen, how you ended here?");
             }
 
-
-        }
-
-
-        else {
+        } else {
             programVersion.getParentFile().mkdirs();
             FileWriter writer = new FileWriter(programVersion);
             writer.write("0");
@@ -92,47 +84,82 @@ public class Controller {
             System.out.println("Filen blev lavet");
         }
 
-        Menu fileMenu = new Menu("Menu");
-        MenuItem menuSettings = new MenuItem("Settings");
-        MenuItem menuClose = new MenuItem("Close");
-        fileMenu.getItems().addAll(menuSettings,menuClose);
-
-        Menu saveMenu = new Menu("Save");
-        MenuItem saveDesktop = new MenuItem("Save Desktop");
-        MenuItem saveEverything = new MenuItem("Save everything");
-        saveMenu.getItems().addAll(saveDesktop,saveEverything);
-
-        Menu loadMenu = new Menu("Load");
-        MenuItem loadBoard = new MenuItem("Load board");
-        MenuItem loadEverything = new MenuItem("Load everything");
-        loadMenu.getItems().addAll(loadBoard,loadEverything);
-
-        menuBar.getMenus().addAll(fileMenu,saveMenu,loadMenu);
-
-        menuClose.setOnAction(e -> {
-         Board.closeProgram();
-        });
-        saveDesktop.setOnAction(e -> {
-           Save.createTextFile();
-            try {
-                OutputStream os = Files.newOutputStream(Save.getFile().toPath());
-                ObjectOutputStream out = new ObjectOutputStream(os);
-                out.writeObject(hBox.getChildren());
-            }catch(Exception ex){ex.printStackTrace();}
-        });
-        saveEverything.setOnAction(e ->{
-            Save.createTextFile();
-        });
-        loadBoard.setOnAction(e ->{
-            System.out.println("nothing yet");
-        });
-        loadEverything.setOnAction(e -> {
-            ArrayList<StickyNote> test = Load.getLoadThing();
-            deleteNotes();
-            StickyListSingleton.getInstance().getArray().addAll(makeNotes(test));
-            doStuff(StickyListSingleton.getInstance().getArray());
-        });
+        makeMenu();
     }
+
+        public void makeMenu(){
+
+            Menu fileMenu = new Menu("Menu");
+            MenuItem menuSettings = new MenuItem("Settings");
+            MenuItem menuClose = new MenuItem("Close");
+            MenuItem menuChangeVersion;
+
+            if(versionControl == false)
+            {
+                menuChangeVersion = new MenuItem("Change to multi-user version");
+            }
+            else
+            {
+                menuChangeVersion = new MenuItem("Change to single-user version");
+            }
+
+            fileMenu.getItems().addAll(menuSettings,menuClose,menuChangeVersion);
+
+
+            Menu saveMenu = new Menu("Save");
+            MenuItem saveDesktop = new MenuItem("Save Desktop");
+            MenuItem saveEverything = new MenuItem("Save everything");
+            saveMenu.getItems().addAll(saveDesktop,saveEverything);
+
+            Menu loadMenu = new Menu("Load");
+            MenuItem loadBoard = new MenuItem("Load board");
+            MenuItem loadEverything = new MenuItem("Load everything");
+            loadMenu.getItems().addAll(loadBoard,loadEverything);
+
+            menuBar.getMenus().addAll(fileMenu,saveMenu,loadMenu);
+
+            menuClose.setOnAction(e -> {
+                Board.closeProgram();
+            });
+
+            menuChangeVersion.setOnAction(e -> {
+               if(versionControl == false){
+                   menuChangeVersion.setText("Change to single-user version");
+                   versionControl = true;
+               }
+               else
+               {
+                   menuChangeVersion.setText("Change to multi-user version");
+                   versionControl = false;
+               }
+
+            });
+
+
+            saveDesktop.setOnAction(e -> {
+                Save.createTextFile();
+                try {
+                    OutputStream os = Files.newOutputStream(Save.getFile().toPath());
+                    ObjectOutputStream out = new ObjectOutputStream(os);
+                    out.writeObject(hBox.getChildren());
+                }catch(Exception ex){ex.printStackTrace();}
+            });
+            saveEverything.setOnAction(e ->{
+                Save.createTextFile();
+            });
+            loadBoard.setOnAction(e ->{
+                System.out.println("nothing yet");
+            });
+            loadEverything.setOnAction(e -> {
+                ArrayList<StickyNote> test = Load.getLoadThing();
+                deleteNotes();
+                StickyListSingleton.getInstance().getArray().addAll(makeNotes(test));
+                doStuff(StickyListSingleton.getInstance().getArray());
+            });
+
+        }
+
+
 
     public void makeNote(boolean upOrDown,double x,double y,Color color,String text,StickyNote stickyNote){
         stickyNote.setUpOrDown(upOrDown);
