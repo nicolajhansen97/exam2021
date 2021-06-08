@@ -19,7 +19,6 @@ import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Controller {
@@ -53,7 +52,8 @@ public class Controller {
     Desktop desktop = new Desktop();
     static Database button = new Database();
     int idToBeDeleted, largestID;
-    static Stage stage = new Stage();
+    static Stage stageNewProject = new Stage();
+    static Stage stageLoadProjects = new Stage();
 
 
 
@@ -149,9 +149,9 @@ public class Controller {
 
                     Parent root = FXMLLoader.load(getClass().getResource("newProject.fxml"));
                     Scene scene = new Scene(root, 600, 600);
-                    stage.setScene(scene);
-                    stage.setTitle("Create new project");
-                    stage.show();
+                    stageNewProject.setScene(scene);
+                    stageNewProject.setTitle("Create new project");
+                    stageNewProject.show();
 
 
                 } catch (IOException ioException) {
@@ -197,12 +197,29 @@ public class Controller {
             loadBoard.setOnAction(e ->{
                 System.out.println("nothing yet");
             });
+
             loadEverything.setOnAction(e -> {
-                ArrayList<StickyNote> test = Load.getLoadThing();
-                deleteNotes();
-                StickyListSingleton.getInstance().getArray().addAll(makeNotes(test));
-                doStuff(StickyListSingleton.getInstance().getArray());
+                if (!versionControl) {
+                    ArrayList<StickyNote> test = Load.getLoadThing();
+                    deleteNotes();
+                    StickyListSingleton.getInstance().getArray().addAll(makeNotes(test));
+                    doStuff(StickyListSingleton.getInstance().getArray());
+                }
+                else{
+                    try {
+                        Parent root = FXMLLoader.load(getClass().getResource("loadProjects.fxml"));
+                        Scene scene = new Scene(root, 600, 400);
+                        stageLoadProjects.setScene(scene);
+                        stageLoadProjects.setTitle("Load project");
+                        stageLoadProjects.show();
+
+
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }}
             });
+
+
 
         }
 

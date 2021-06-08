@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 
-public class newProject {
+public class NewProject {
 
     @FXML
     Button bCreateNewProject;
@@ -21,7 +21,7 @@ public class newProject {
         projectName = tProjectField.getText();
         Controller.button.createNewProject(projectName);
         controllerIntance.setProjectName(projectName);
-        Controller.stage.close();
+        Controller.stageNewProject.close();
     }
 
 
