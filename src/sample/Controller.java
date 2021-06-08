@@ -109,18 +109,13 @@ public class Controller {
             MenuItem menuChangeVersion;
 
 
-
             if(!versionControl)
             {
                 menuChangeVersion = new MenuItem("Change to multi-user version");
-
-
-
             }
             else
             {
                 menuChangeVersion = new MenuItem("Change to single-user version");
-
             }
 
             fileMenu.getItems().addAll(createNewProject,menuSettings,menuClose,menuChangeVersion);
@@ -136,7 +131,12 @@ public class Controller {
             MenuItem loadEverything = new MenuItem("Load everything");
             loadMenu.getItems().addAll(loadBoard,loadEverything);
 
-            menuBar.getMenus().addAll(fileMenu,saveMenu,loadMenu);
+
+            Menu exportMenu = new Menu("Export");
+            MenuItem exportToText  = new MenuItem("Export project to text");
+            exportMenu.getItems().add(exportToText);
+
+            menuBar.getMenus().addAll(fileMenu,saveMenu,loadMenu,exportMenu);
 
             menuClose.setOnAction(e -> {
                 Board.closeProgram();
