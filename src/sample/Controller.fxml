@@ -41,7 +41,7 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="566.0" prefWidth="1500.0" BorderPane.alignment="CENTER">
          <content>
-            <AnchorPane fx:id="pane" onDragDetected="#load" prefHeight="200.0" prefWidth="200.0" />
+            <AnchorPane fx:id="pane" prefHeight="200.0" prefWidth="200.0" />
          </content>
       </ScrollPane>
    </center>

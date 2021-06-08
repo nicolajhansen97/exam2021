@@ -18,7 +18,7 @@ public class Database {
 
         // (2) establish Connection
         // Connection con= DriverManager.getConnection("jdbc:sqlserver://EASV-THA-Q418\TH:1433;databaseName=DB_JAN","tha","123456");
-        Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
+        Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
 
 
         // (3) create the statement
@@ -43,8 +43,8 @@ public class Database {
 
             ps.setInt(1,StickyListSingleton.getInstance().getArray().get(i).getID());
             ps.setString(2,"TestBoard");
-            ps.setString(4,StickyListSingleton.getInstance().getArray().get(i).getSomeText());
             ps.setString(3,StickyListSingleton.getInstance().getArray().get(i).getColorString());
+            ps.setString(4,StickyListSingleton.getInstance().getArray().get(i).getSomeText());
             ps.setBoolean(5,StickyListSingleton.getInstance().getArray().get(i).getUpOrDown());
             ps.setDouble(6,StickyListSingleton.getInstance().getArray().get(i).getXCoordinate());
             ps.setDouble(7,StickyListSingleton.getInstance().getArray().get(i).getYCoordinate());
@@ -91,12 +91,12 @@ public class Database {
     }
 }
 
-    public void loadDatabase() {
+    public void loadDatabase(String projectName) {
         tempStickyNote.clear();
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
 
             int count = 0;
             String sql = "SELECT * FROM tblNotes";
@@ -105,7 +105,7 @@ public class Database {
 
             while(rs.next()){
                 String bName = rs.getString("fldBoardName");
-                if (bName.equals("TestBoard")){
+                if (bName.equals(projectName)){
                     tempStickyNote.add(new StickyNote());
                     tempStickyNote.get(count).setSavedText(rs.getString(4));
                     tempStickyNote.get(count).setUpOrDown(rs.getBoolean(5));
@@ -131,7 +131,7 @@ public class Database {
 
             // (2) establish Connection
             // Connection con= DriverManager.getConnection("jdbc:sqlserver://EASV-THA-Q418\TH:1433;databaseName=DB_JAN","tha","123456");
-            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
 
             // (3a) Prepare Statement
             PreparedStatement ps = con.prepareStatement("INSERT INTO tblBoard VALUES (?, ?)");
@@ -185,7 +185,7 @@ public class Database {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
 
             String sql = "SELECT * FROM tblBoard";
             Statement stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);

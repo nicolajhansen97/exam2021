@@ -211,7 +211,8 @@ public class Controller {
                         Scene scene = new Scene(root, 600, 400);
                         stageLoadProjects.setScene(scene);
                         stageLoadProjects.setTitle("Load project");
-                        stageLoadProjects.show();
+                        stageLoadProjects.showAndWait();
+                        load();
 
 
                     } catch (IOException ioException) {
@@ -400,9 +401,9 @@ public class Controller {
         globalID = largestID;
         button.saveDatabase();
     }
-    public void load (ActionEvent event){
+    public void load (){
         System.out.println("IM IN");
-        button.loadDatabase();
+        button.loadDatabase(projectName);
         deleteNotes();
         StickyListSingleton.getInstance().getArray().addAll(makeNotes(button.getTempStickyNote()));
         doStuff(StickyListSingleton.getInstance().getArray());
