@@ -24,9 +24,6 @@ public class Controller {
     Pane pane;
 
     @FXML
-    ScrollBar scrollBar;
-
-    @FXML
     HBox hBox;
 
     @FXML
@@ -36,7 +33,7 @@ public class Controller {
     MenuBar menuBar;
 
     @FXML
-    Button butSearch, testButton, tes;
+    Button testButton, tes;
 
     @FXML
     TextField searchField;
@@ -48,6 +45,7 @@ public class Controller {
     final int noteSizeDifference = 250;
     int globalID = 1;
     boolean versionControl;
+    File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()) + "\\Sticky Note\\Program.txt");
     Desktop desktop = new Desktop();
     Database button = new Database();
     int idToBeDeleted, largestID;
@@ -60,34 +58,38 @@ public class Controller {
      */
     public void initialize() throws IOException {
 
-        File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()) + "\\Sticky Note\\Program.txt");
-
-        if (programVersion.exists() && programVersion.isFile()) {
-            System.out.println("Filen eksisterer allerede!");
-
-            BufferedReader reader = new BufferedReader(new FileReader(programVersion));
-            String version = reader.readLine();
-            System.out.println(version);
-
-            if (version.equals("0")) {
-                versionControl = false;
-
-            } else if (version.equals("1")) {
-               versionControl = true;
-            } else {
-                System.out.println("Ops! Something wierd happen, how you ended here?");
-            }
-
-        } else {
-            programVersion.getParentFile().mkdirs();
-            FileWriter writer = new FileWriter(programVersion);
-            writer.write("0");
-            writer.close();
-            System.out.println("Filen blev lavet");
-        }
-
+        createVersionFilePath();
         makeMenu();
     }
+
+        public void createVersionFilePath() throws IOException {
+
+            if (programVersion.exists() && programVersion.isFile()) {
+                System.out.println("Filen eksisterer allerede!");
+
+                BufferedReader reader = new BufferedReader(new FileReader(programVersion));
+                String version = reader.readLine();
+                System.out.println(version);
+
+                try{
+                    if (version.equals("0")) {
+                        versionControl = false;
+
+                    } else if (version.equals("1")) {
+                        versionControl = true;
+                    }}
+                catch(Exception e){
+                    System.out.println("Ops! Something wierd happen, how you ended here?");
+                }
+
+            } else {
+                programVersion.getParentFile().mkdirs();
+                FileWriter writer = new FileWriter(programVersion);
+                writer.write("0");
+                writer.close();
+                System.out.println("Filen blev lavet");
+            }
+        }
 
         public void makeMenu(){
 
@@ -99,6 +101,7 @@ public class Controller {
             if(!versionControl)
             {
                 menuChangeVersion = new MenuItem("Change to multi-user version");
+
             }
             else
             {
@@ -128,11 +131,21 @@ public class Controller {
                if(versionControl == false){
                    menuChangeVersion.setText("Change to single-user version");
                    versionControl = true;
+                   try {
+                       changeToMulti();
+                   } catch (IOException ioException) {
+                       ioException.printStackTrace();
+                   }
                }
                else
                {
                    menuChangeVersion.setText("Change to multi-user version");
                    versionControl = false;
+                   try {
+                       changeToSingle();
+                   } catch (IOException ioException) {
+                       ioException.printStackTrace();
+                   }
                }
 
             });
@@ -161,6 +174,17 @@ public class Controller {
 
         }
 
+        public void changeToMulti() throws IOException {
+            FileWriter writer = new FileWriter(programVersion);
+            writer.write("1");
+            writer.close();
+        }
+
+        public void changeToSingle() throws IOException {
+            FileWriter writer = new FileWriter(programVersion);
+            writer.write("0");
+            writer.close();
+        }
 
 
     public void makeNote(boolean upOrDown,double x,double y,Color color,String text, int id,StickyNote stickyNote){
