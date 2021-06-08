@@ -14,7 +14,6 @@ public class LoadProjects {
     Button bLoadProjectName;
 
     Database database = new Database();
-    Controller controller = new Controller();
 
     public void initialize ()
     {
@@ -28,8 +27,7 @@ public class LoadProjects {
     }
 
     public void getProjectName(ActionEvent actionEvent) {
-
-        controller.setProjectName((String) lProjectsView.getSelectionModel().getSelectedItem());
+        ProjectNameSingleton.getInstance().setS((String) lProjectsView.getSelectionModel().getSelectedItem());
         Controller.stageLoadProjects.close();
     }
 }

@@ -15,12 +15,10 @@ public class NewProject {
 
     String projectName;
 
-    Controller controllerIntance = new Controller();
-
     public void createProject(ActionEvent actionEvent) {
         projectName = tProjectField.getText();
         Controller.button.createNewProject(projectName);
-        controllerIntance.setProjectName(projectName);
+        ProjectNameSingleton.getInstance().setS(projectName);
         Controller.stageNewProject.close();
     }
 

@@ -55,10 +55,6 @@ public class Controller {
     static Stage stageNewProject = new Stage();
     static Stage stageLoadProjects = new Stage();
 
-
-
-    String projectName;
-
     /*
         public ArrayList<StickyNote> getArraylist(){
             return listTest;
@@ -403,12 +399,14 @@ public class Controller {
     }
     public void load (){
         System.out.println("IM IN");
-        button.loadDatabase(projectName);
+        button.loadDatabase(ProjectNameSingleton.getInstance().getS());
         deleteNotes();
         StickyListSingleton.getInstance().getArray().addAll(makeNotes(button.getTempStickyNote()));
         doStuff(StickyListSingleton.getInstance().getArray());
         findLargestID();
         globalID = largestID;
+
+        System.out.println(ProjectNameSingleton.getInstance().getS());
     }
 
     public void getINFO(ActionEvent event){
@@ -418,12 +416,13 @@ public class Controller {
     }
 
     public void findLargestID(){
+        try {
         Collections.sort(StickyListSingleton.getInstance().getArray(), new IDComparator());
         largestID = StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).getID()+1;
         System.out.println(largestID);
+        } catch (Exception e){
+            System.out.println("No or invalid ID");
+        }
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
 }

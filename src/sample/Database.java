@@ -18,7 +18,7 @@ public class Database {
 
         // (2) establish Connection
         // Connection con= DriverManager.getConnection("jdbc:sqlserver://EASV-THA-Q418\TH:1433;databaseName=DB_JAN","tha","123456");
-        Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
+        Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
 
 
         // (3) create the statement
@@ -96,7 +96,7 @@ public class Database {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
 
             int count = 0;
             String sql = "SELECT * FROM tblNotes";
@@ -131,7 +131,7 @@ public class Database {
 
             // (2) establish Connection
             // Connection con= DriverManager.getConnection("jdbc:sqlserver://EASV-THA-Q418\TH:1433;databaseName=DB_JAN","tha","123456");
-            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
 
             // (3a) Prepare Statement
             PreparedStatement ps = con.prepareStatement("INSERT INTO tblBoard VALUES (?, ?)");
@@ -185,7 +185,7 @@ public class Database {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 
-            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","datamatiker");
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa","123456");
 
             String sql = "SELECT * FROM tblBoard";
             Statement stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
