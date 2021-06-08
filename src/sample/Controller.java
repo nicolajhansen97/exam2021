@@ -51,7 +51,7 @@ public class Controller {
     boolean versionControl;
     File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()) + "\\Sticky Note\\Program.txt");
     Desktop desktop = new Desktop();
-    Database button = new Database();
+    static Database button = new Database();
     int idToBeDeleted, largestID;
     static Stage stage = new Stage();
 

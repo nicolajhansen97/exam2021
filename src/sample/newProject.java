@@ -16,11 +16,10 @@ public class newProject {
     String projectName;
 
     Controller controllerIntance = new Controller();
-    Database databaseInstance = new Database();
 
     public void createProject(ActionEvent actionEvent) {
         projectName = tProjectField.getText();
-        databaseInstance.createNewProject(projectName);
+        Controller.button.createNewProject(projectName);
         controllerIntance.setProjectName(projectName);
         Controller.stage.close();
     }
