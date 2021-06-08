@@ -42,7 +42,6 @@ public class Controller {
     @FXML
     TextField searchField;
 
-    newProject projectInstance = new newProject();
     StickyNote firstTest = new StickyNote();
     //ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCountX = 0;
@@ -54,6 +53,10 @@ public class Controller {
     Desktop desktop = new Desktop();
     Database button = new Database();
     int idToBeDeleted, largestID;
+
+
+
+    String projectName;
 
     /*
         public ArrayList<StickyNote> getArraylist(){
@@ -399,5 +402,9 @@ public class Controller {
         Collections.sort(StickyListSingleton.getInstance().getArray(), new IDComparator());
         largestID = StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).getID()+1;
         System.out.println(largestID);
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }
