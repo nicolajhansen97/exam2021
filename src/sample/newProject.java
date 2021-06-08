@@ -22,6 +22,7 @@ public class newProject {
         projectName = tProjectField.getText();
         databaseInstance.createNewProject(projectName);
         controllerIntance.setProjectName(projectName);
+        Controller.stage.close();
     }
 
 

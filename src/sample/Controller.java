@@ -53,6 +53,7 @@ public class Controller {
     Desktop desktop = new Desktop();
     Database button = new Database();
     int idToBeDeleted, largestID;
+    static Stage stage = new Stage();
 
 
 
@@ -148,10 +149,10 @@ public class Controller {
 
                     Parent root = FXMLLoader.load(getClass().getResource("newProject.fxml"));
                     Scene scene = new Scene(root, 600, 600);
-                    Stage stage = new Stage();
                     stage.setScene(scene);
                     stage.setTitle("Create new project");
                     stage.show();
+
 
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
