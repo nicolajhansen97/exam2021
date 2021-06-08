@@ -3,6 +3,9 @@ package sample;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -10,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
@@ -94,21 +98,27 @@ public class Controller {
         public void makeMenu(){
 
             Menu fileMenu = new Menu("Menu");
+            MenuItem createNewProject = new MenuItem("Create new project");
             MenuItem menuSettings = new MenuItem("Settings");
             MenuItem menuClose = new MenuItem("Close");
             MenuItem menuChangeVersion;
+
+
 
             if(!versionControl)
             {
                 menuChangeVersion = new MenuItem("Change to multi-user version");
 
+
+
             }
             else
             {
                 menuChangeVersion = new MenuItem("Change to single-user version");
+
             }
 
-            fileMenu.getItems().addAll(menuSettings,menuClose,menuChangeVersion);
+            fileMenu.getItems().addAll(createNewProject,menuSettings,menuClose,menuChangeVersion);
 
 
             Menu saveMenu = new Menu("Save");
@@ -117,7 +127,7 @@ public class Controller {
             saveMenu.getItems().addAll(saveDesktop,saveEverything);
 
             Menu loadMenu = new Menu("Load");
-            MenuItem loadBoard = new MenuItem("Load board");
+            MenuItem loadBoard = new MenuItem("Load desktop");
             MenuItem loadEverything = new MenuItem("Load everything");
             loadMenu.getItems().addAll(loadBoard,loadEverything);
 
@@ -125,6 +135,23 @@ public class Controller {
 
             menuClose.setOnAction(e -> {
                 Board.closeProgram();
+            });
+
+
+            createNewProject.setOnAction(e -> {
+
+                try {
+
+                    Parent root = FXMLLoader.load(getClass().getResource("newProject.fxml"));
+                    Scene scene = new Scene(root, 600, 600);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.setTitle("Create new project");
+                    stage.show();
+
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
             });
 
             menuChangeVersion.setOnAction(e -> {
