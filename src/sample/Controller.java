@@ -42,6 +42,7 @@ public class Controller {
     @FXML
     TextField searchField;
 
+    newProject projectInstance = new newProject();
     StickyNote firstTest = new StickyNote();
     //ArrayList<StickyNote> listTest = new ArrayList<>();
     int globalCountX = 0;

@@ -13,7 +13,16 @@ public class newProject {
     @FXML
     TextField tProjectField;
 
+    String projectName;
+
+    Database databaseInstance = new Database();
+
     public void createProject(ActionEvent actionEvent) {
-        tProjectField.getText();
+        projectName = tProjectField.getText();
+        databaseInstance.createNewProject(projectName);
+    }
+
+    public String getProjectName() {
+        return projectName;
     }
 }

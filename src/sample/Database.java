@@ -143,6 +143,7 @@ public class Database {
             ps.setString(1,projectName);
             ps.setInt(2,1);
 
+            ps.executeUpdate();
             System.out.println("Saved in database");
 
               /*
