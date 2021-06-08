@@ -96,7 +96,7 @@ public class Controller {
             MenuItem menuClose = new MenuItem("Close");
             MenuItem menuChangeVersion;
 
-            if(versionControl == false)
+            if(!versionControl)
             {
                 menuChangeVersion = new MenuItem("Change to multi-user version");
             }
