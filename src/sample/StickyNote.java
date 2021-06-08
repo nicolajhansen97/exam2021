@@ -30,45 +30,55 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     private transient ImageView[] colorPictures = new ImageView[7];
     private transient Image[] colorPicture = new Image[7];
 
-    public boolean getUpOrDown(){
-        return upOrDown;
-    }
-    public void setUpOrDown(boolean upOrDown){
-        this.upOrDown = upOrDown;
-    }
-
-    public Button getDeleteStickyNote(){
-        return deleteStickyNote;
-    }
-
-    public ImageView getDown(){
-        return colorPictures[5];
-    }
-    public ImageView getUp(){
-        return colorPictures[6];
-    }
-
-    public Button getTestButton() {
-        return testButton;
-    }
-
-    public Button getColorStickyNoteAqua(){
-        return colorStickyNoteAqua;
-    }
-    public Button getColorStickyNotePurple(){
-        return colorStickyNotePurple;
-    }
-    public Button getColorStickyNoteRed(){
-        return colorStickyNoteRed;
-    }
-    public Button getColorStickyNoteYellow(){
-        return colorStickyNoteYellow;
-    }
-
-    public Pane getStickyNote(){
-        return stickyNote;
-    }
-
+    //UpOrDown
+    public boolean getUpOrDown(){ return upOrDown; }
+    public void setUpOrDown(boolean upOrDown){ this.upOrDown = upOrDown; }
+    public ImageView getDown(){ return colorPictures[5]; }
+    public ImageView getUp(){ return colorPictures[6]; }
+    //Button
+    public Button getDeleteStickyNote(){ return deleteStickyNote; }
+    public Button getTestButton() { return testButton;}
+    public Button getColorStickyNoteAqua(){ return colorStickyNoteAqua; }
+    public Button getColorStickyNotePurple(){ return colorStickyNotePurple; }
+    public Button getColorStickyNoteRed(){ return colorStickyNoteRed; }
+    public Button getColorStickyNoteYellow(){ return colorStickyNoteYellow; }
+    //Pane
+    public Pane getStickyNote(){ return stickyNote; }
+    //Text
+    public void setSavedText (String text){ this.savedText = text; }
+    public void saveText(){ this.savedText = textOnStickyNote.getText(); }
+    public String getSavedText(){ return this.savedText; }
+    @Override
+    public void setText(String text) { textOnStickyNote.setText(text); }
+    @Override
+    public String getSomeText() { return textOnStickyNote.getText(); }
+    //Color
+    public void setColorToString(String color){ this.savedColor = color; }
+    public void saveColorToString(){ this.savedColor = getColorString(); }
+    public String getSavedColor(){ return savedColor; }
+    public String getColorString(){
+        return String.format("#%02x%02x%02x",
+                (int) (255 * color.getRed()),
+                (int) (255 * color.getGreen()),
+                (int) (255 * color.getBlue())); }
+    @Override
+    public void setColor(Color color) { this.color = color; }
+    @Override
+    public Color getColor() { return color;}
+    //Coordinates
+    public void saveCoordinates(){ double x = getXCoordinate();double y = getYCoordinate(); }
+    @Override
+    public void setCoordinate(double x, double y) { this.x=x;this.y=y; }
+    @Override
+    public double getXCoordinate() { return x; }
+    @Override
+    public double getYCoordinate() { return y; }
+    //ID
+    @Override
+    public void setID(int ID) { this.ID = ID; }
+    @Override
+    public int getID() { return ID;}
+    //methods
     public void update(){
         stickyNote.setLayoutX(x);
         stickyNote.setLayoutY(y);
@@ -82,44 +92,6 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
         testButton.setStyle("-fx-background-color:"+colorS+"");
     }
-
-    public void setSavedText (String text){
-        this.savedText = text;
-    }
-
-    public void setColorToString(String color){
-        this.savedColor = color;
-    }
-    //save one
-    public void saveColorToString(){
-        this.savedColor = getColorString();
-    }
-    //save two
-    public void saveText(){
-        assert false;
-        this.savedText = textOnStickyNote.getText();
-    }
-    //save three
-    public void saveCoordinates(){
-        double x = getXCoordinate();
-        double y = getYCoordinate();
-    }
-
-    public String getSavedText(){
-        return this.savedText;
-    }
-    public String getSavedColor(){
-        return savedColor;
-    }
-
-    public String getColorString(){
-        return String.format("#%02x%02x%02x",
-                (int) (255 * color.getRed()),
-                (int) (255 * color.getGreen()),
-                (int) (255 * color.getBlue()));
-    }
-
-
     public Pane createPane(){
         stickyNote = new Pane();
 
@@ -192,47 +164,6 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         button.setStyle("-fx-background-color:"+getColorString()+"");
         return button;
     }
-
-    @Override
-    public void setColor(Color color) {
-        this.color = color;
-    }
-    public void setColorFromSavedInfo() {
-        this.color = Color.web(getSavedColor());
-    }
-
-    @Override
-    public Color getColor() { return color;}
-
-    @Override
-    public void setText(String text) {
-        textOnStickyNote.setText(text);
-    }
-
-    @Override
-    public String getSomeText() {
-        return textOnStickyNote.getText();
-    }
-
-    @Override
-    public void setCoordinate(double x, double y) {
-        this.x=x;
-        this.y=y;
-    }
-
-    @Override
-    public double getXCoordinate() { return x; }
-
-    @Override
-    public double getYCoordinate() { return y; }
-
-    @Override
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    @Override
-    public int getID() { return ID;}
 
     public boolean isDelete(){
         return deleted;
