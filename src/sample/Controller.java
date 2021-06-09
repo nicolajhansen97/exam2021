@@ -123,9 +123,9 @@ public class Controller {
             saveMenu.getItems().addAll(saveDesktop,saveEverything);
 
             Menu loadMenu = new Menu("Load");
-            MenuItem loadBoard = new MenuItem("Load desktop");
+            MenuItem loadDesktop = new MenuItem("Load desktop");
             MenuItem loadEverything = new MenuItem("Load everything");
-            loadMenu.getItems().addAll(loadBoard,loadEverything);
+            loadMenu.getItems().addAll(loadDesktop,loadEverything);
 
 
             Menu exportMenu = new Menu("Export");
@@ -181,15 +181,6 @@ public class Controller {
 
             });
 
-
-            saveDesktop.setOnAction(e -> {
-                Save.createTextFile();
-                try {
-                    OutputStream os = Files.newOutputStream(Save.getFile().toPath());
-                    ObjectOutputStream out = new ObjectOutputStream(os);
-                    out.writeObject(hBox.getChildren());
-                }catch(Exception ex){ex.printStackTrace();}
-            });
             saveEverything.setOnAction(e ->{
                 if (!versionControl) {
                     Save.createTextFile();
@@ -204,9 +195,6 @@ public class Controller {
                         save();
                     }
                 }
-            });
-            loadBoard.setOnAction(e ->{
-                System.out.println("nothing yet");
             });
 
             loadEverything.setOnAction(e -> {
