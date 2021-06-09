@@ -5,8 +5,8 @@ import java.util.Comparator;
 public class ExportText {
 
     private String text;
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     public ExportText(String text,double x,double y){
         this.text = text;
@@ -17,9 +17,7 @@ public class ExportText {
     public void addText(String text) { this.text = text+this.text; }
     public String getText() { return text; }
     public double getX() { return x; }
-    public void setX(double x) { this.x = x;}
     public double getY() { return y; }
-    public void setY(double y) { this.y = y; }
 }
 class ExportTextComparator implements Comparator<ExportText> {
     @Override
