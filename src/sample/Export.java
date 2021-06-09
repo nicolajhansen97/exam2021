@@ -28,19 +28,13 @@ public class Export {
                 textList.add(new ExportText(stickyNote.getSomeText(),stickyNote.getXCoordinate(),stickyNote.getYCoordinate()));
             }
         }
-        for (ExportText e: textList){
-            System.out.println(e.getText());
-        }
-        System.out.println();
         //sort array
         sortArray();
         //print array//put array into one string
         StringBuilder tempText = new StringBuilder();
         for (ExportText e: textList){
-            System.out.println(e.getText());
             tempText.append(e.getText()).append("\n");
         }
-        System.out.println();
         //sort text from xy coordinates and format
         if (file != null) {
             try {
@@ -71,14 +65,12 @@ public class Export {
             if (i+1!=textList.size()) {
                 if (textList.get(i).getX()-textList.get(i+1).getX()>-100&&textList.get(i).getX()-textList.get(i+1).getX()<100&&!(textList.get(i+1).getText().contains("-"))){
                     //move it
-                    System.out.println(textList.get(i).getX()-textList.get(i+1).getX());
                     Collections.swap(textList,i,i+1);
                 }
             }
             if (i==textList.size()-1){
                 if (textList.get(i).getX()-textList.get(i-1).getX()>-100&&textList.get(i).getX()-textList.get(i-1).getX()<100&&!(textList.get(i).getText().contains("-"))){
                     //move it
-                    System.out.println(textList.get(i).getX()-textList.get(i-1).getX());
                     Collections.swap(textList,i,i-1);
                 }
             }
