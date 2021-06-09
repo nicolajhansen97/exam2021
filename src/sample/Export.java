@@ -1,21 +1,16 @@
 package sample;
 
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Export {
 
-    private static String words = "", coordinates = "";
-    private static ArrayList<ExportText> textList = new ArrayList<>();
+    private static final ArrayList<ExportText> textList = new ArrayList<>();
 
 
     public static void exportToText(ArrayList<StickyNote> list){
@@ -30,7 +25,6 @@ public class Export {
         //export text into note
         for (StickyNote stickyNote : list) {
             if (stickyNote.getUpOrDown()) {
-                //textList.add(sortText(stickyNote.getSomeText()+"|"+stickyNote.getXCoordinate()+"-"+stickyNote.getYCoordinate()));
                 textList.add(new ExportText(stickyNote.getSomeText(),stickyNote.getXCoordinate(),stickyNote.getYCoordinate()));
             }
         }
