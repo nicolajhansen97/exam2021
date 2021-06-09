@@ -30,6 +30,11 @@ public class LoadProjects {
         ProjectNameSingleton.getInstance().setS((String) lProjectsView.getSelectionModel().getSelectedItem());
         Controller.stageLoadProjects.close();
     }
+
+    public void deleteProject(ActionEvent actionEvent) {
+        lProjectsView.getItems().remove(lProjectsView.getSelectionModel().getSelectedItem());
+
+    }
 }
 
 
