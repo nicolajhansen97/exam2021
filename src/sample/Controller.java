@@ -147,6 +147,10 @@ public class Controller {
                 }
             });
 
+            exportToText.setOnAction(e -> {
+                Export.exportToText(StickyListSingleton.getInstance().getArray());
+            });
+
             menuChangeVersion.setOnAction(e -> {
                if(versionControl == false){
                    menuChangeVersion.setText("Change to single-user version");
@@ -293,9 +297,14 @@ public class Controller {
                                 stickyNote.setUpOrDown(false);
                             } else {
                                 pane.getChildren().add(stickyNote.getStickyNote());
+                                for (StickyNote note : test) {
+                                    if (stickyNote.getXCoordinate() == note.getXCoordinate()&&stickyNote.getUpOrDown()==note.getUpOrDown()&& !stickyNote.getUpOrDown()){
+                                        stickyNote.setCoordinate(250, 0);
+                                        stickyNote.update();
+                                    }
+                                }
                                 stickyNote.getTestButton().setGraphic(stickyNote.getDown());
                                 stickyNote.setUpOrDown(true);
-
                             }
                             stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
                         }
