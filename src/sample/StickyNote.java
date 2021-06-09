@@ -16,7 +16,6 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     private String savedColor;
     private String savedText = "";
     private double x,y;
-    private int ID;
     private final double sizeOfStickyNote = 275;
     private final double sizeOfTextOnStickyNote = 200;
     private final double sizeOfButton = 30;
@@ -73,11 +72,6 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     public double getXCoordinate() { return x; }
     @Override
     public double getYCoordinate() { return y; }
-    //ID
-    @Override
-    public void setID(int ID) { this.ID = ID; }
-    @Override
-    public int getID() { return ID;}
     //methods
     public void update(){
         stickyNote.setLayoutX(x);

@@ -46,7 +46,7 @@ public class Controller {
     int globalCountX = 0;
     int globalCountY = 0;
     final int noteSizeDifference = 250;
-    int globalID = 1;
+    //int globalID = 1;
     boolean versionControl;
     File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()) + "\\Sticky Note\\Program.txt");
     Desktop desktop = new Desktop();
@@ -188,7 +188,11 @@ public class Controller {
                 }catch(Exception ex){ex.printStackTrace();}
             });
             saveEverything.setOnAction(e ->{
-                Save.createTextFile();
+                if (!versionControl) {
+                    Save.createTextFile();
+                } else {
+                    save();
+                }
             });
             loadBoard.setOnAction(e ->{
                 System.out.println("nothing yet");
@@ -233,12 +237,11 @@ public class Controller {
         }
 
 
-    public void makeNote(boolean upOrDown,double x,double y,Color color,String text, int id,StickyNote stickyNote){
+    public void makeNote(boolean upOrDown,double x,double y,Color color,String text,StickyNote stickyNote){
         stickyNote.setUpOrDown(upOrDown);
         stickyNote.setCoordinate(x,y);
         stickyNote.setColor(color);
         stickyNote.setText(text);
-        stickyNote.setID(id);
         if (stickyNote.getUpOrDown()){
             pane.getChildren().add(stickyNote.getStickyNote());
         }
@@ -250,7 +253,7 @@ public class Controller {
             test2.add(new StickyNote());
             hBox.getChildren().add(test2.get(i).createPane());
             makeNote(test.get(i).getUpOrDown(),test.get(i).getXCoordinate(),test.get(i).getYCoordinate(),
-                    Color.web(test.get(i).getSavedColor()),test.get(i).getSavedText(), test.get(i).getID(),test2.get(i));
+                    Color.web(test.get(i).getSavedColor()),test.get(i).getSavedText(),test2.get(i));
             test2.get(i).update();
         }
         return test2;
@@ -356,10 +359,10 @@ public class Controller {
             StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).setCoordinate(globalCountX, globalCountY);
         }
         //listTest.get(listTest.size() - 1).setID(globalID++);
-        StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).setID(globalID++);
+        //StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).setID(globalID++);
         globalCountX = globalCountX + noteSizeDifference;
         //System.out.println(listTest.get(listTest.size() - 1).getID());
-        System.out.println(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).getID());
+        //System.out.println(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).getID());
 
         //hBox.getChildren().addAll(listTest.get(listTest.size() - 1).createPane());
         hBox.getChildren().addAll(StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size() - 1).createPane());
@@ -393,36 +396,17 @@ public class Controller {
 
          */
     }
-    public void save (ActionEvent event){
-        globalID = largestID;
-        button.saveDatabase();
+    public void save(){
+        button.saveDatabase(ProjectNameSingleton.getInstance().getS());
     }
-    public void load (){
+    public void load(){
         System.out.println("IM IN");
         button.loadDatabase(ProjectNameSingleton.getInstance().getS());
         deleteNotes();
         StickyListSingleton.getInstance().getArray().addAll(makeNotes(button.getTempStickyNote()));
         doStuff(StickyListSingleton.getInstance().getArray());
-        findLargestID();
-        globalID = largestID;
 
         System.out.println(ProjectNameSingleton.getInstance().getS());
-    }
-
-    public void getINFO(ActionEvent event){
-        System.out.println(StickyListSingleton.getInstance().getArray().get(0).getID());
-        System.out.println(StickyListSingleton.getInstance().getArray().get(1).getID());
-        System.out.println(StickyListSingleton.getInstance().getArray().get(2).getID());
-    }
-
-    public void findLargestID(){
-        try {
-        Collections.sort(StickyListSingleton.getInstance().getArray(), new IDComparator());
-        largestID = StickyListSingleton.getInstance().getArray().get(StickyListSingleton.getInstance().getArray().size()-1).getID()+1;
-        System.out.println(largestID);
-        } catch (Exception e){
-            System.out.println("No or invalid ID");
-        }
     }
 
 }

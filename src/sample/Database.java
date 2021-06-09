@@ -10,7 +10,7 @@ public class Database {
 
     private ArrayList<String> tempProject = new ArrayList<>();
 
-    public void saveDatabase() {
+    public void saveDatabase(String pName) {
         try{
         // (1) load the driver into memory
 
@@ -28,26 +28,26 @@ public class Database {
             ResultSet rs = stmt.executeQuery(sql);
             while(rs.next()){
                 String bName = rs.getString("fldBoardName");
-                if (bName.equals("TestBoard")){
+                if (bName.equals(pName)){
                     rs.deleteRow();
                 }
             }
 
         // (3a) Prepare Statement
-        PreparedStatement ps = con.prepareStatement("INSERT INTO tblNotes VALUES (?,?,?,?,?,?,?)");
+        PreparedStatement ps = con.prepareStatement("INSERT INTO tblNotes VALUES (?,?,?,?,?,?)");
 
 
 
             // PreparedStatement ps = con.prepareStatement("SELECT * FROM project");
         for (int i = 0; i < StickyListSingleton.getInstance().getArray().size(); i++) {
 
-            ps.setInt(1,StickyListSingleton.getInstance().getArray().get(i).getID());
-            ps.setString(2,"TestBoard");
-            ps.setString(3,StickyListSingleton.getInstance().getArray().get(i).getColorString());
-            ps.setString(4,StickyListSingleton.getInstance().getArray().get(i).getSomeText());
-            ps.setBoolean(5,StickyListSingleton.getInstance().getArray().get(i).getUpOrDown());
-            ps.setDouble(6,StickyListSingleton.getInstance().getArray().get(i).getXCoordinate());
-            ps.setDouble(7,StickyListSingleton.getInstance().getArray().get(i).getYCoordinate());
+            //ps.setInt(1,StickyListSingleton.getInstance().getArray().get(i).getID());
+            ps.setString(1,pName);
+            ps.setString(2,StickyListSingleton.getInstance().getArray().get(i).getColorString());
+            ps.setString(3,StickyListSingleton.getInstance().getArray().get(i).getSomeText());
+            ps.setBoolean(4,StickyListSingleton.getInstance().getArray().get(i).getUpOrDown());
+            ps.setDouble(5,StickyListSingleton.getInstance().getArray().get(i).getXCoordinate());
+            ps.setDouble(6,StickyListSingleton.getInstance().getArray().get(i).getYCoordinate());
 
             int rows = ps.executeUpdate();
         }
@@ -109,7 +109,7 @@ public class Database {
                     tempStickyNote.add(new StickyNote());
                     tempStickyNote.get(count).setSavedText(rs.getString(4));
                     tempStickyNote.get(count).setUpOrDown(rs.getBoolean(5));
-                    tempStickyNote.get(count).setID(rs.getInt(1));
+
                     tempStickyNote.get(count).setColorToString(rs.getString(3));
                     tempStickyNote.get(count).setCoordinate(rs.getDouble(6), rs.getDouble(7));
                     count++;

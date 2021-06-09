@@ -16,8 +16,6 @@ public interface StickyNoteInterface {
     public double getXCoordinate();
     public double getYCoordinate();
 
-    public void setID(int ID);
-    public int getID();
 
 
 }
