@@ -140,11 +140,18 @@ public class Controller {
 
 
             createNewProject.setOnAction(e -> {
+               if(versionControl == false)
+               {
+                   pane.getChildren().clear();
+               }
+               else
+               {
                 try {
                     makeNewProjectScreen();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
+               }
             });
 
             exportToText.setOnAction(e -> {
