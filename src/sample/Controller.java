@@ -214,7 +214,6 @@ public class Controller {
                         stageLoadProjects.showAndWait();
                         load();
 
-
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }}

@@ -13,12 +13,10 @@ public class NewProject {
     @FXML
     TextField tProjectField;
 
-    String projectName;
 
     public void createProject(ActionEvent actionEvent) {
-        projectName = tProjectField.getText();
-        Controller.button.createNewProject(projectName);
-        ProjectNameSingleton.getInstance().setS(projectName);
+        ProjectNameSingleton.getInstance().setS(tProjectField.getText());
+        Controller.button.createNewProject(ProjectNameSingleton.getInstance().getS());
         Controller.stageNewProject.close();
     }
 

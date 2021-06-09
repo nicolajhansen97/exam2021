@@ -21,6 +21,7 @@ public class ProjectNameSingleton
     }
 
     public String getS() {
+        Main.primaryStage.setTitle("Sticky notes - " + s);
         return s;
     }
 
