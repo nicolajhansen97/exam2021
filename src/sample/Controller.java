@@ -140,16 +140,8 @@ public class Controller {
 
 
             createNewProject.setOnAction(e -> {
-
                 try {
-
-                    Parent root = FXMLLoader.load(getClass().getResource("newProject.fxml"));
-                    Scene scene = new Scene(root, 600, 600);
-                    stageNewProject.setScene(scene);
-                    stageNewProject.setTitle("Create new project");
-                    stageNewProject.show();
-
-
+                    makeNewProjectScreen();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
@@ -191,7 +183,15 @@ public class Controller {
                 if (!versionControl) {
                     Save.createTextFile();
                 } else {
-                    save();
+                    if (ProjectNameSingleton.getInstance().getS() == null) {
+                        try {
+                            makeNewProjectScreen();
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    } else {
+                        save();
+                    }
                 }
             });
             loadBoard.setOnAction(e ->{
@@ -407,6 +407,14 @@ public class Controller {
         doStuff(StickyListSingleton.getInstance().getArray());
 
         System.out.println(ProjectNameSingleton.getInstance().getS());
+    }
+
+    public void makeNewProjectScreen() throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("newProject.fxml"));
+        Scene scene = new Scene(root, 600, 600);
+        stageNewProject.setScene(scene);
+        stageNewProject.setTitle("Create new project");
+        stageNewProject.show();
     }
 
 }
