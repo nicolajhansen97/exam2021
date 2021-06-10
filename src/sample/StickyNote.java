@@ -159,12 +159,4 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         return button;
     }
 
-    public boolean isDelete(){
-        return deleted;
-    }
-
-    public void setIsDelete(boolean isThisDeleted){
-        this.deleted = isThisDeleted;
-    }
-
 }

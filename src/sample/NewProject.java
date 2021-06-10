@@ -21,7 +21,7 @@ public class NewProject {
             Controller.newProjectWasPressed = true;
         }
         ProjectNameSingleton.getInstance().setS(tProjectField.getText());
-        Controller.button.createNewProject(ProjectNameSingleton.getInstance().getS());
+        Controller.databaseInstance.createNewProject(ProjectNameSingleton.getInstance().getS());
         Controller.stageNewProject.close();
     }
 }

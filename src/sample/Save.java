@@ -10,13 +10,6 @@ public class Save {
 
     private static File file;
 
-    public static String getFileName() {
-        return file.getName();
-    }
-
-    public void setFilepath() {
-    }
-
     public static void createTextFile() {
         final String sampleText = Board.getBoardText();
 
@@ -48,14 +41,4 @@ public class Save {
     public static File getFile() {
         return file;
     }
-
-    public void overrideOldTextFile() {
-    }
-
-    public void getName() {
-    }
-
-    public void setName() {
-    }
-
 }
