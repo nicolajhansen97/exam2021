@@ -325,13 +325,15 @@ public class Controller {
                             double adjustedX;
                             double adjustedY;
 
-                            adjustedX = event.getSceneX() + (scrollPane.getWidth() * scrollPane.getHvalue() - 275);
+                            adjustedX = event.getSceneX() + (pane.getLayoutBounds().getWidth() - pane.getScene().getWidth()) * scrollPane.getHvalue() - 275;
+                            adjustedY = event.getSceneY() + (pane.getLayoutBounds().getWidth() - pane.getScene().getWidth()) * scrollPane.getHvalue() - 275;
                             adjustedY = event.getSceneY() + (pane.getLayoutBounds().getHeight() - pane.getScene().getHeight() - 50);
+
 
                             //scrollPane.getContent().parentProperty().addListener();
                             //scrollPane.widthProperty().multiply(scrollPane.getHvalue());
                             //adjustedX = scrollPane.getVmax()
-                            stickyNote.setCoordinate(adjustedX, adjustedY);
+                            stickyNote.setCoordinate(adjustedX , adjustedY);
                             stickyNote.update();
                             //}else {
                             //  stickyNote.setCoordinate(575,150);
