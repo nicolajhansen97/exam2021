@@ -20,7 +20,6 @@ public class LoadProjects {
       loadProjects();
     }
 
-
     public void loadProjects(){
         database.loadProjects();
         lProjectsView.getItems().addAll(database.getTempProject());
