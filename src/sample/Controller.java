@@ -350,9 +350,9 @@ public class Controller {
                             double adjustedX;
                             double adjustedY;
 
-                            adjustedX = event.getSceneX() + (pane.getLayoutBounds().getWidth() - pane.getScene().getWidth()) * scrollPane.getHvalue() - 275;
-                            adjustedY = event.getSceneY() + (pane.getLayoutBounds().getWidth() - pane.getScene().getWidth()) * scrollPane.getHvalue() - 275;
-                            adjustedY = event.getSceneY() + (pane.getLayoutBounds().getHeight() - pane.getScene().getHeight() - 50);
+                            adjustedX = event.getSceneX() + (pane.getLayoutBounds().getWidth() - pane.getScene().getWidth()) * scrollPane.getHvalue();
+                            adjustedY = event.getSceneY() + (pane.getLayoutBounds().getHeight() - pane.getScene().getHeight()) * scrollPane.getVvalue() - 50;
+                            //adjustedY = event.getSceneY() + (pane.getLayoutBounds().getHeight() - pane.getScene().getHeight() - 50);
 
 
                             //scrollPane.getContent().parentProperty().addListener();
