@@ -353,7 +353,7 @@ public class Controller {
                             adjustedX = event.getSceneX() + (scrollPane.getWidth() * scrollPane.getHvalue() - 275 );
                             adjustedY = event.getSceneY() + (pane.getLayoutBounds().getHeight() - pane.getScene().getHeight() - 50);
 
-                            scrollPane.getContent().parentProperty().addListener();
+                            //scrollPane.getContent().parentProperty().addListener();
                             //scrollPane.widthProperty().multiply(scrollPane.getHvalue());
                             //adjustedX = scrollPane.getVmax()
                             stickyNote.setCoordinate(adjustedX, adjustedY);
