@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Database {
 
-    private String password = "123456";
+    private String password = "datamatiker";
 
     //temporary lists gained from the database to apply in the functions that add sticky notes to the project
     private ArrayList<StickyNote> tempStickyNote = new ArrayList<>();

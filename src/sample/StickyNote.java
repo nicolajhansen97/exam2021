@@ -85,6 +85,15 @@ public class StickyNote implements StickyNoteInterface, Serializable {
         colorStickyNoteYellow.setStyle("-fx-background-color:"+colorS+"");
         deleteStickyNote.setStyle("-fx-background-color:"+colorS+"");
         testButton.setStyle("-fx-background-color:"+colorS+"");
+
+        if(!upOrDown)
+        {
+            testButton.setGraphic(getUp());
+        }
+        else
+        {
+            testButton.setGraphic(getDown());
+        }
     }
 
     public Pane createPane(){
