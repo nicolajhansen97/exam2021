@@ -54,7 +54,7 @@ public class Controller {
     int idToBeDeleted, largestID;
     static Stage stageNewProject = new Stage();
     static Stage stageLoadProjects = new Stage();
-
+    static boolean newProjectWasPressed;
     /*
         public ArrayList<StickyNote> getArraylist(){
             return listTest;
@@ -148,6 +148,10 @@ public class Controller {
                {
                 try {
                     makeNewProjectScreen();
+                    if(ProjectNameSingleton.getInstance().getS() != null && newProjectWasPressed) {
+                        deleteNotes();
+                        newProjectWasPressed = false;
+                    }
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
@@ -417,7 +421,7 @@ public class Controller {
         Scene scene = new Scene(root, 600, 600);
         stageNewProject.setScene(scene);
         stageNewProject.setTitle("Create new project");
-        stageNewProject.show();
+        stageNewProject.showAndWait();
     }
 
 }

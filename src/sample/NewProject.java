@@ -17,6 +17,7 @@ public class NewProject {
     public void createProject(ActionEvent actionEvent) {
         ProjectNameSingleton.getInstance().setS(tProjectField.getText());
         Controller.button.createNewProject(ProjectNameSingleton.getInstance().getS());
+        Controller.newProjectWasPressed = true;
         Controller.stageNewProject.close();
     }
 
