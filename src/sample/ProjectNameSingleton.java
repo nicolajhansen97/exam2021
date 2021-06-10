@@ -9,7 +9,7 @@ public class ProjectNameSingleton
     private static ProjectNameSingleton single_instance = null;
 
     // variable of type String
-    public String s;
+    public String s = null;
 
     // static method to create instance of Singleton class
     public static ProjectNameSingleton getInstance()

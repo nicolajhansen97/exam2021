@@ -15,11 +15,13 @@ public class NewProject {
 
 
     public void createProject(ActionEvent actionEvent) {
+        if (ProjectNameSingleton.getInstance().getS() == null){
+            Controller.newProjectWasPressed = false;
+        } else {
+            Controller.newProjectWasPressed = true;
+        }
         ProjectNameSingleton.getInstance().setS(tProjectField.getText());
         Controller.button.createNewProject(ProjectNameSingleton.getInstance().getS());
-        Controller.newProjectWasPressed = true;
         Controller.stageNewProject.close();
     }
-
-
 }
