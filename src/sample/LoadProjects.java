@@ -32,8 +32,9 @@ public class LoadProjects {
     }
 
     public void deleteProject(ActionEvent actionEvent) {
+        System.out.println(lProjectsView.getSelectionModel().getSelectedItem().toString());
+        database.deleteProject(lProjectsView.getSelectionModel().getSelectedItem().toString());
         lProjectsView.getItems().remove(lProjectsView.getSelectionModel().getSelectedItem());
-
     }
 }
 

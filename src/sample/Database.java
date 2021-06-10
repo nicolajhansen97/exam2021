@@ -140,6 +140,54 @@ public class Database {
         }
     }
 
+    public void deleteProject(String pName){
+        try{
+            // (1) load the driver into memory
+
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // (2) establish Connection
+            Connection con= DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=stickyNotesProgram","sa",password);
+
+            System.out.println(pName);
+
+            // (3) create the statement
+            String sql = "SELECT * FROM tblNotes";
+            Statement stmt = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String bName = rs.getString("fldBoardName");
+                if (bName.equals(pName)){
+                    rs.deleteRow();
+                }
+            }
+
+
+            rs.close();
+
+            stmt = con.createStatement();
+
+            // (3a) Prepare Statement
+            PreparedStatement ps = con.prepareStatement("DELETE FROM tblBoard WHERE fldBoardName = (?)");
+
+            // PreparedStatement ps = con.prepareStatement("SELECT * FROM project");
+            ps.setString(1, pName);
+
+            int rows = ps.executeUpdate();
+
+            System.out.println("Deleted in database");
+
+
+
+            // (5) close the connection
+            con.close();
+            stmt.close();
+            ps.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public ArrayList<StickyNote> getTempStickyNote() {
         return tempStickyNote;
     }

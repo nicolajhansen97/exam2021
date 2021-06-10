@@ -33,6 +33,9 @@ public class Controller {
     BorderPane borderPane;
 
     @FXML
+    ScrollPane scrollPane;
+
+    @FXML
     MenuBar menuBar;
 
     @FXML
@@ -343,7 +346,17 @@ public class Controller {
                         public void handle(MouseEvent event) {
                             //if ((stickyNote.getXCoordinate()>=-25 &&stickyNote.getXCoordinate() <=1500-250)
                             //&& stickyNote.getYCoordinate()>=-50 &&stickyNote.getYCoordinate() <=550-225) {
-                            stickyNote.setCoordinate(event.getSceneX() - 25, event.getSceneY() - 50);
+
+                            double adjustedX;
+                            double adjustedY;
+
+                            adjustedX = event.getSceneX() + (scrollPane.getWidth() * scrollPane.getHvalue() - 275 );
+                            adjustedY = event.getSceneY() + (pane.getLayoutBounds().getHeight() - pane.getScene().getHeight() - 50);
+
+                            scrollPane.getContent().parentProperty().addListener();
+                            //scrollPane.widthProperty().multiply(scrollPane.getHvalue());
+                            //adjustedX = scrollPane.getVmax()
+                            stickyNote.setCoordinate(adjustedX, adjustedY);
                             stickyNote.update();
                             //}else {
                             //  stickyNote.setCoordinate(575,150);
@@ -424,4 +437,7 @@ public class Controller {
         stageNewProject.showAndWait();
     }
 
+    public void testCoordinates(ActionEvent e) {
+      //  System.out.println(scrollPane.getHmax() + " " + scrollPane.getHvalue());
+    }
 }
