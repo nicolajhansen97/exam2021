@@ -239,11 +239,16 @@ public class Controller {
         return tempList;
     }
 
+    /**
+     * This method is called by different methods to clear the notes.
+     * An example of the usage is if you load a new project
+     */
     public void deleteNotes() {
         StickyListSingleton.getInstance().getArray().clear();
         pane.getChildren().clear();
         hBox.getChildren().clear();
     }
+
 
     EventHandler<ActionEvent> deleteEvent = new EventHandler<ActionEvent>() {
         @Override
@@ -286,7 +291,11 @@ public class Controller {
                             stickyNote.getTestButton().setPrefSize(stickyNote.prefIconSize, stickyNote.prefIconSize);
                         }
                     });
-                    //Change Color
+
+                    /**
+                     * This method will be activated when the aqua button on a sticky note set the color to yellow,
+                     * and then update the note.
+                     */
                     stickyNote.getColorStickyNoteAqua().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
@@ -294,6 +303,11 @@ public class Controller {
                             stickyNote.update();
                         }
                     });
+
+                    /**
+                     * This method will be activated when the purple button on a sticky note set the color to purple,
+                     * and then update the note.
+                     */
                     stickyNote.getColorStickyNotePurple().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
@@ -301,6 +315,11 @@ public class Controller {
                             stickyNote.update();
                         }
                     });
+
+                    /**
+                     * This method will be activated when the red button on a sticky note set the color to red,
+                     * and then update the note.
+                     */
                     stickyNote.getColorStickyNoteRed().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
@@ -308,6 +327,11 @@ public class Controller {
                             stickyNote.update();
                         }
                     });
+
+                    /**
+                     * This method will be activated when the yellow button on a sticky note set the color to yellow,
+                     * and then update the note.
+                     */
                     stickyNote.getColorStickyNoteYellow().setOnAction(new EventHandler<ActionEvent>() {
                         @Override
                         public void handle(ActionEvent event) {
@@ -315,6 +339,7 @@ public class Controller {
                             stickyNote.update();
                         }
                     });
+
                     //move
                     stickyNote.getStickyNote().setOnMouseDragged(new EventHandler<MouseEvent>() {
                         @Override
@@ -376,7 +401,7 @@ public class Controller {
     }
 
     public void load() {
-        System.out.println("IM IN");
+        System.out.println("Database connection established.");
         databaseInstance.loadDatabase(ProjectNameSingleton.getInstance().getS());
         deleteNotes();
         StickyListSingleton.getInstance().getArray().addAll(makeNotes(databaseInstance.getTempStickyNote()));
@@ -385,6 +410,13 @@ public class Controller {
         System.out.println(ProjectNameSingleton.getInstance().getS());
     }
 
+    /**
+     * This method is called when the menu button to create a new project is pressed. It will create a pop-up window,
+     * where you will be able to create a new project. It shows the window and wait for the window to be closed down.
+     * This is made for other methods to wait to be called until the window is pressed, so it will get the new name,
+     * you choose when you create the project.
+     * @throws IOException
+     */
     public void makeNewProjectScreen() throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("newProject.fxml"));
         Scene scene = new Scene(root, 600, 600);
