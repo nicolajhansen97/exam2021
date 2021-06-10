@@ -7,10 +7,15 @@ public class Database {
 
     private String password = "123456";
 
+    //temporary lists gained from the database to apply in the functions that add sticky notes to the project
     private ArrayList<StickyNote> tempStickyNote = new ArrayList<>();
-
     private ArrayList<String> tempProject = new ArrayList<>();
 
+    /**
+     * This method first deletes all excisting entries in the stickynote table that matches the project name in the parameter
+     * Then it inserts the current values of the Stickynote Singleton into the database with the correct project name
+     * @param pName The project name
+     */
     public void saveDatabase(String pName) {
         try{
         // (1) load the driver into memory
@@ -60,6 +65,10 @@ public class Database {
     }
 }
 
+    /**
+     * This loads all the sticky notes and their values into the workspace, it uses the project name to get the correct stickynotes
+     * @param projectName The project name used to locate the right sticky notes.
+     */
     public void loadDatabase(String projectName) {
         tempStickyNote.clear();
         try{
@@ -94,6 +103,12 @@ public class Database {
         }
     }
 
+    /**
+     * Creates a new project, in which sticky notes can be saved.
+     * Currently the project is made using a hardcoded user in the user table, this will be changed once logins
+     * and profiles are implemented.
+     * @param projectName Name of the project made in the DB,
+     */
     public void createNewProject(String projectName){
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -117,6 +132,10 @@ public class Database {
         }
     }
 
+    /**
+     * Loads the projects from the projects table, to be used in a listview where the correct project can be selected.
+     * The projects get added to a temporary arraylist that can then be getted by another function that might need it.
+     */
     public void loadProjects() {
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -140,6 +159,11 @@ public class Database {
         }
     }
 
+    /**
+     * Deletes projects and associated stickynotes from the database, using the projectname as reference.
+     * First the sticky notes are deleted, the the project.
+     * @param pName Name of the project to be deleted.
+     */
     public void deleteProject(String pName){
         try{
             // (1) load the driver into memory
@@ -188,10 +212,18 @@ public class Database {
         }
     }
 
+    /**
+     * Getter for the temporary sticky notes
+     * @return returns a list of stickynotes to be used in other methods..
+     */
     public ArrayList<StickyNote> getTempStickyNote() {
         return tempStickyNote;
     }
 
+    /**
+     * Getter for the temporary project list
+     * @return returns a list of the projects to be used by listviews.
+     */
     public ArrayList<String> getTempProject() {
         return tempProject;
     }

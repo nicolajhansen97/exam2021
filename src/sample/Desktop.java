@@ -12,6 +12,11 @@ public class Desktop implements DesktopInterface{
 
     }
 
+    /**
+     * A method that checks if the search field text contain any of the same text as the StickyNote objects.
+     * @param searchCriteria
+     * @return
+     */
     @Override
     public ArrayList<StickyNote> searchStickyNotes(String searchCriteria) {
 

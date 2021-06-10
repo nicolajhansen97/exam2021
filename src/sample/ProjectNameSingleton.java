@@ -11,7 +11,9 @@ public class ProjectNameSingleton
     // variable of type String
     public String s = null;
 
-    // static method to create instance of Singleton class
+    /**
+     * static method to create instance of Singleton class
+     */
     public static ProjectNameSingleton getInstance()
     {
         if (single_instance == null){
@@ -20,11 +22,18 @@ public class ProjectNameSingleton
         return single_instance;
     }
 
+    /**
+     * Getter of the project name single instance
+     * @return returns the name of project
+     */
     public String getS() {
         Main.primaryStage.setTitle("Sticky notes - " + s);
         return s;
     }
 
+    /**
+     * Setter of the project name.
+     */
     public void setS(String s) {
         this.s = s;
     }

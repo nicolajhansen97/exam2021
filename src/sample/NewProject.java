@@ -13,7 +13,11 @@ public class NewProject {
     @FXML
     TextField tProjectField;
 
-
+    /**
+     * Creates a new project, a static boolean is changed if the project name is applied, in which case another class handles
+     * removing the objects of the project as a new one is made. Name of the project is also changed.
+     * @param actionEvent The button "Create new project"
+     */
     public void createProject(ActionEvent actionEvent) {
         if (ProjectNameSingleton.getInstance().getS() == null){
             Controller.newProjectWasPressed = false;
