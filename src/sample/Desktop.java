@@ -32,6 +32,8 @@ public class Desktop implements DesktopInterface{
     }
 
 
+    //This is not used for now, but if given more time these load and save functions for the desktop (bottom pane)
+    //would allow for saving the notes you havent placed on the board individually and used in other projects.
     @Override
     public void loadDesktopProject() {
 
