@@ -101,21 +101,20 @@ public class Controller {
      */
     public void makeMenu() {
 
+        //The following creates the normal menu.
         Menu fileMenu = new Menu("Menu");
         MenuItem createNewProject = new MenuItem("Create new project");
         MenuItem menuSettings = new MenuItem("Settings");
         MenuItem menuClose = new MenuItem("Close");
         MenuItem menuChangeVersion;
 
-
+        //This part of the method, changes the version when you press the button.
         if (!versionControl) {
             menuChangeVersion = new MenuItem("Change to multi-user version");
         } else {
             menuChangeVersion = new MenuItem("Change to single-user version");
         }
-
         fileMenu.getItems().addAll(createNewProject, menuSettings, menuClose, menuChangeVersion);
-
 
         Menu saveMenu = new Menu("Save");
         MenuItem saveDesktop = new MenuItem("Save Desktop");
@@ -127,18 +126,19 @@ public class Controller {
         MenuItem loadEverything = new MenuItem("Load everything");
         loadMenu.getItems().addAll(loadDesktop, loadEverything);
 
-
         Menu exportMenu = new Menu("Export");
         MenuItem exportToText = new MenuItem("Export project to text");
         exportMenu.getItems().add(exportToText);
 
         menuBar.getMenus().addAll(fileMenu, saveMenu, loadMenu, exportMenu);
 
+        //This will close the program on action.
         menuClose.setOnAction(e -> {
             Board.closeProgram();
         });
 
-
+        //This will create a new project, if the version is single-version it will just clear the project, if its multi-version it will open a window,
+        // so you can make a database with that name, so you can use that to save in.
         createNewProject.setOnAction(e -> {
             if (versionControl == false) {
                 pane.getChildren().clear();
@@ -155,10 +155,12 @@ public class Controller {
             }
         });
 
+        //This function will on action export to a text file
         exportToText.setOnAction(e -> {
             Export.exportToText(StickyListSingleton.getInstance().getArray());
         });
 
+        //calls the method, which changes the versions
         menuChangeVersion.setOnAction(e -> {
             if (versionControl == false) {
                 menuChangeVersion.setText("Change to single-user version");
@@ -179,6 +181,8 @@ public class Controller {
             }
         });
 
+        //Saves everything. If its the single-user version its just saving in a bin file.
+        //If its multi-user version it will check if there is a project already, if there is a problem it save, if not it open create a new project scene.
         saveEverything.setOnAction(e -> {
             if (!versionControl) {
                 Save.createTextFile();
@@ -195,6 +199,7 @@ public class Controller {
             }
         });
 
+        //Loads everything, if its the single-user it open filechoser to open a bin file, if its multi-user it will open a scene that can load from database.
         loadEverything.setOnAction(e -> {
             if (!versionControl) {
                 ArrayList<StickyNote> test = Load.getLoadThing();
