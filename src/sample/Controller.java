@@ -51,12 +51,22 @@ public class Controller {
     static Stage stageLoadProjects = new Stage();
     static boolean newProjectWasPressed;
 
+    /**
+     * Initialize runs when the program opens. This will call the filePath method first, and depended of which version you have, it will load different menus.
+     * @throws IOException
+     */
     public void initialize() throws IOException {
 
         createVersionFilePath();
         makeMenu();
     }
 
+    /**
+     * This method is checking if you have a file to remember what version you use. If you dont have the file, it will make the full file path.
+     * Next time you open the program it will have remembered which version you use, which make it easy for the user.
+     *
+     * @throws IOException
+     */
     public void createVersionFilePath() throws IOException {
 
         if (programVersion.exists() && programVersion.isFile()) {
@@ -86,6 +96,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Make menu creates the menu. It makes a menu depending on which version is chosen. See different notes in the method, for more info.
+     */
     public void makeMenu() {
 
         Menu fileMenu = new Menu("Menu");
@@ -204,12 +217,22 @@ public class Controller {
         });
     }
 
+    /**
+     * This method will change the version of the program you use. It is called by a button which make the version change to multi-version.
+     * It will save it to a document, so it is remembered to next time you open the program, as the program load before the programs open.
+     * @throws IOException
+     */
     public void changeToMulti() throws IOException {
         FileWriter writer = new FileWriter(programVersion);
         writer.write("1");
         writer.close();
     }
 
+    /**
+     * This method will change the version of the program you use. It is called by a button which make the version change to single-version.
+     * It will save it to a document, so it is remembered to next time you open the program, as the program load before the programs open.
+     * @throws IOException
+     */
     public void changeToSingle() throws IOException {
         FileWriter writer = new FileWriter(programVersion);
         writer.write("0");
