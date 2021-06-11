@@ -394,6 +394,7 @@ public class Controller {
         }
     }
 
+
     @FXML
     public void createNote() {
         StickyListSingleton.getInstance().addToArray(new StickyNote());
@@ -408,6 +409,10 @@ public class Controller {
         updateNotes(StickyListSingleton.getInstance().getArray());
     }
 
+    /**
+     * This method allow you to search through sticky note keywords in the desktop (bottom pane).
+     * @param event An event that triggers each time a key is released in the textfield.
+     */
     @FXML
     public void searchButton(KeyEvent event) {
         ArrayList<StickyNote> tempSN = desktop.searchStickyNotes(searchField.getText());
@@ -419,10 +424,17 @@ public class Controller {
         }
     }
 
+    /**
+     * A method that will save stickynotes with the project name, using it to see what should be overwritten.
+     */
     public void save() {
         databaseInstance.saveDatabase(ProjectNameSingleton.getInstance().getS());
     }
 
+    /**
+     * Load project from the database, using project name to find the correct stickynotes to load. It also removes existing notes
+     * from the current project
+     */
     public void load() {
         System.out.println("Database connection established.");
         databaseInstance.loadDatabase(ProjectNameSingleton.getInstance().getS());

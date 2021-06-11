@@ -87,7 +87,6 @@ public class Database {
                     tempStickyNote.add(new StickyNote());
                     tempStickyNote.get(count).setSavedText(rs.getString(4));
                     tempStickyNote.get(count).setUpOrDown(rs.getBoolean(5));
-
                     tempStickyNote.get(count).setColorToString(rs.getString(3));
                     tempStickyNote.get(count).setCoordinate(rs.getDouble(6), rs.getDouble(7));
                     count++;
@@ -207,7 +206,7 @@ public class Database {
             con.close();
             stmt.close();
             ps.close();
-        }catch(Exception e){
+        } catch(Exception e){
             e.printStackTrace();
         }
     }
