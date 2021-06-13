@@ -63,13 +63,17 @@ public class Export {
         }
         for (int i = 0; i <textList.size(); i++) {
             if (i+1!=textList.size()) {
-                if (textList.get(i).getX()-textList.get(i+1).getX()>-100&&textList.get(i).getX()-textList.get(i+1).getX()<100&&!(textList.get(i+1).getText().contains("-"))){
+                if (textList.get(i).getX()
+                        -textList.get(i+1).getX()>-100&&textList.get(i).getX()
+                        -textList.get(i+1).getX()<100&&!(textList.get(i+1).getText().contains("-"))){
                     //move it
                     Collections.swap(textList,i,i+1);
                 }
             }
             if (i==textList.size()-1){
-                if (textList.get(i).getX()-textList.get(i-1).getX()>-100&&textList.get(i).getX()-textList.get(i-1).getX()<100&&!(textList.get(i).getText().contains("-"))){
+                if (textList.get(i).getX()
+                        -textList.get(i-1).getX()>-100&&textList.get(i).getX()
+                        -textList.get(i-1).getX()<100&&!(textList.get(i).getText().contains("-"))){
                     //move it
                     Collections.swap(textList,i,i-1);
                 }
