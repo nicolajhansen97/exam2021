@@ -11,8 +11,6 @@ public class Save {
     private static File file;
 
     public static void createTextFile() {
-        final String sampleText = Board.getBoardText();
-
         //Creating fileChooser
         FileChooser s = new FileChooser();
         //getting the txt extension
@@ -20,7 +18,7 @@ public class Save {
         s.getExtensionFilters().add(extFilter);
         //making a file
         file = s.showSaveDialog(new Stage());
-        //creating a text file
+        //saving info so we can use it after load
         for (int i = 0; i <StickyListSingleton.getInstance().getArray().size(); i++) {
             StickyListSingleton.getInstance().getArray().get(i).saveCoordinates();
             StickyListSingleton.getInstance().getArray().get(i).saveText();
@@ -34,7 +32,6 @@ public class Save {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
         }
     }
 

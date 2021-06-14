@@ -1,9 +1,5 @@
 package sample;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.input.KeyEvent;
-
 import java.util.ArrayList;
 
 public class Desktop implements DesktopInterface{
@@ -23,7 +19,7 @@ public class Desktop implements DesktopInterface{
         ArrayList<StickyNote> returnList = new ArrayList<>();
 
         for (int i = 0; i < StickyListSingleton.getInstance().getArray().size(); i++) {
-            if (StickyListSingleton.getInstance().getArray().get(i).getSomeText().toLowerCase().contains(searchCriteria.toLowerCase())) {
+            if (StickyListSingleton.getInstance().getArray().get(i).getText().toLowerCase().contains(searchCriteria.toLowerCase())) {
                 returnList.add(StickyListSingleton.getInstance().getArray().get(i));
             }
         }

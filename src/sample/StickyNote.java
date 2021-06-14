@@ -50,7 +50,7 @@ public class StickyNote implements StickyNoteInterface, Serializable {
     @Override
     public void setText(String text) { textOnStickyNote.setText(text); }
     @Override
-    public String getSomeText() { return textOnStickyNote.getText(); }
+    public String getText() { return textOnStickyNote.getText(); }
     //Color
     public void setColorToString(String color){ this.savedColor = color; }
     public void saveColorToString(){ this.savedColor = getColorString(); }

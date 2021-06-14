@@ -44,7 +44,7 @@ public class Database {
 
             ps.setString(1,pName);
             ps.setString(2,StickyListSingleton.getInstance().getArray().get(i).getColorString());
-            ps.setString(3,StickyListSingleton.getInstance().getArray().get(i).getSomeText());
+            ps.setString(3,StickyListSingleton.getInstance().getArray().get(i).getText());
             ps.setBoolean(4,StickyListSingleton.getInstance().getArray().get(i).getUpOrDown());
             ps.setDouble(5,StickyListSingleton.getInstance().getArray().get(i).getXCoordinate());
             ps.setDouble(6,StickyListSingleton.getInstance().getArray().get(i).getYCoordinate());
