@@ -1,13 +1,13 @@
-package sample;
+import javafx.scene.paint.Color;
+import org.testng.annotations.Test;
+import sample.StickyNote;
 
-import org.junit.jupiter.api.Test;
+import static org.testng.AssertJUnit.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class StickyNoteTest {
+public class StickyNoteTest {
 
     @Test
-    void getUpOrDown() {
+     void getUpOrDown() {
         //Setup Test
         StickyNote stickyNote = new StickyNote();
         boolean actualBoolean;
@@ -20,7 +20,7 @@ class StickyNoteTest {
     }
 
     @Test
-    void setUpOrDown() {
+     void setUpOrDown() {
         //Setup Test
         StickyNote stickyNote = new StickyNote();
         boolean actualBoolean;
@@ -31,5 +31,15 @@ class StickyNoteTest {
 
         //Make Assertion
         assertEquals(true, actualBoolean);
+    }
+
+    @Test
+    void getColor(){
+        StickyNote stickyNote = new StickyNote();
+        Color actualColor;
+
+        actualColor = stickyNote.getColor();
+
+        assertEquals(Color.YELLOW,actualColor);
     }
 }

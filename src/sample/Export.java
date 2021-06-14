@@ -25,7 +25,7 @@ public class Export {
         //export text into note
         for (StickyNote stickyNote : list) {
             if (stickyNote.getUpOrDown()) {
-                textList.add(new ExportText(stickyNote.getSomeText(),stickyNote.getXCoordinate(),stickyNote.getYCoordinate()));
+                textList.add(new ExportText(stickyNote.getText(),stickyNote.getXCoordinate(),stickyNote.getYCoordinate()));
             }
         }
         //sort array
