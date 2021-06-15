@@ -20,6 +20,7 @@ import sample.Domain.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Controller {
 
@@ -210,7 +211,7 @@ public class Controller {
                 updateNotes(StickyListSingleton.getInstance().getArray());
             } else {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("Fxml/loadProjects.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("..//Fxml//loadProjects.fxml"));
                     Scene scene = new Scene(root, 600, 400);
                     stageLoadProjects.setScene(scene);
                     stageLoadProjects.setTitle("Load project");
@@ -460,7 +461,7 @@ public class Controller {
      * @throws IOException
      */
     public void makeNewProjectScreen() throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Fxml/newProject.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("..//Fxml//newProject.fxml"));
         Scene scene = new Scene(root, 600, 600);
         stageNewProject.setScene(scene);
         stageNewProject.setTitle("Create new project");
