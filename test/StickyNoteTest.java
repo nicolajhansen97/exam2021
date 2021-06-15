@@ -1,6 +1,6 @@
 import javafx.scene.paint.Color;
 import org.testng.annotations.Test;
-import sample.StickyNote;
+import sample.Domain.StickyNote;
 
 import static org.testng.AssertJUnit.assertEquals;
 
