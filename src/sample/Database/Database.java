@@ -1,10 +1,8 @@
 package sample.Database;
 
-import sample.Domain.DatabaseIF;
 import sample.Domain.StickyListSingleton;
 import sample.Domain.StickyNote;
 
-import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 

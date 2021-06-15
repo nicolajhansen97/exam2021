@@ -1,7 +1,7 @@
 package sample.Domain;
 
 import sample.Database.Database;
-import sample.Main;
+import sample.Database.DatabaseIF;
 
 public class DatabaseSingleton {
 

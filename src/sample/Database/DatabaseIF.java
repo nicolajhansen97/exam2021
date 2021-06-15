@@ -1,4 +1,6 @@
-package sample.Domain;
+package sample.Database;
+
+import sample.Domain.StickyNote;
 
 import java.util.ArrayList;
 
