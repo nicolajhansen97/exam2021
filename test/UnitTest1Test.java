@@ -1,4 +1,5 @@
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
+
 public class UnitTest1Test {
     @Test
     public void test() {
