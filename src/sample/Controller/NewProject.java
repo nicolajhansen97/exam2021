@@ -3,6 +3,7 @@ package sample.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import sample.Domain.DatabaseSingleton;
 import sample.Domain.ProjectNameSingleton;
 
 
@@ -26,7 +27,8 @@ public class NewProject {
             Controller.newProjectWasPressed = true;
         }
         ProjectNameSingleton.getInstance().setS(tProjectField.getText());
-        Controller.databaseInstance.createNewProject(ProjectNameSingleton.getInstance().getS());
+        //Controller.databaseInstance.createNewProject(ProjectNameSingleton.getInstance().getS());
+        DatabaseSingleton.getInstance().createNewProject(ProjectNameSingleton.getInstance().getS());
         Controller.stageNewProject.close();
     }
 }

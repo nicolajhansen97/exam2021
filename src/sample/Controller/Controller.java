@@ -48,7 +48,7 @@ public class Controller {
     boolean versionControl;
     File programVersion = new File(new File(FileSystemView.getFileSystemView().getHomeDirectory().getAbsolutePath()) + "\\Sticky Note\\Program.txt");
     Desktop desktop = new Desktop();
-    static Database databaseInstance = new Database();
+   // static DatabaseIF databaseInstance = new Database();
     int idToBeDeleted;
     static Stage stageNewProject = new Stage();
     static Stage stageLoadProjects = new Stage();
@@ -436,7 +436,8 @@ public class Controller {
      * A method that will save stickynotes with the project name, using it to see what should be overwritten.
      */
     public void save() {
-        databaseInstance.saveDatabase(ProjectNameSingleton.getInstance().getS());
+       //databaseInstance.saveDatabase(ProjectNameSingleton.getInstance().getS());
+        DatabaseSingleton.getInstance().saveDatabase(ProjectNameSingleton.getInstance().getS());
     }
 
     /**
@@ -445,9 +446,11 @@ public class Controller {
      */
     public void load() {
         System.out.println("Database connection established.");
-        databaseInstance.loadDatabase(ProjectNameSingleton.getInstance().getS());
+        //databaseInstance.loadDatabase();
+        DatabaseSingleton.getInstance().loadDatabase(ProjectNameSingleton.getInstance().getS());
         deleteNotes();
-        StickyListSingleton.getInstance().getArray().addAll(makeNotes(databaseInstance.getTempStickyNote()));
+        //StickyListSingleton.getInstance().getArray().addAll(makeNotes(databaseInstance.getTempStickyNote()));
+        StickyListSingleton.getInstance().getArray().addAll(makeNotes(DatabaseSingleton.getInstance().getTempStickyNote()));
         updateNotes(StickyListSingleton.getInstance().getArray());
 
         System.out.println(ProjectNameSingleton.getInstance().getS());

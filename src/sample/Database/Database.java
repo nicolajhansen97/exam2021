@@ -1,14 +1,16 @@
 package sample.Database;
 
+import sample.Domain.DatabaseIF;
 import sample.Domain.StickyListSingleton;
 import sample.Domain.StickyNote;
 
+import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Database {
+public class Database implements DatabaseIF {
 
-    private String password = "datamatiker";
+    private String password = "123456";
 
     //temporary lists gained from the database to apply in the functions that add sticky notes to the project
     private ArrayList<StickyNote> tempStickyNote = new ArrayList<>();
