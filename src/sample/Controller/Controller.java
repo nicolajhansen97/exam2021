@@ -245,7 +245,10 @@ public class Controller {
         writer.close();
     }
 
-
+    /***
+     * here is the mateNote method we get the info as parameters and then set the stickyNote as that info. and move the
+     * note to the board if the boolean is true.
+     */
     public void makeNote(boolean upOrDown, double x, double y, Color color, String text, StickyNote stickyNote) {
         stickyNote.setUpOrDown(upOrDown);
         stickyNote.setCoordinate(x, y);
@@ -256,6 +259,11 @@ public class Controller {
         }
     }
 
+    /***
+     * this is the makeNotes method here we make a temporaryList which we use
+     * to make use of the loaded info and then we use makeNote and parse the info that got saved to
+     * we can update the note to be correct and then we return the Arraylist so make use of.
+     */
     public ArrayList<StickyNote> makeNotes(ArrayList<StickyNote> test) {
         ArrayList<StickyNote> tempList = new ArrayList<>();
         for (int i = 0; i < test.size(); i++) {
@@ -279,6 +287,10 @@ public class Controller {
     }
 
 
+    /***
+     * this is a eventHandler for deleting the notes we get the buttons source and parse it into the parent of the
+     * stickyNote so we can delete the stickyNote
+     */
     EventHandler<ActionEvent> deleteEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -290,6 +302,13 @@ public class Controller {
         }
     };
 
+    /***
+     * This is the updateNotes method it is the method that checks and handles everything on the notes.
+     * so we can see what note we touch and use its features like deleting and moving it onto the board
+     * or down to the desktop. we also have a handle for changing the color of the note, and lastly we have the moving
+     * of the notes, so we get a drag handle for the note we are touching and begin changing the x and y and update the
+     * note so the note moves.
+     */
     public void updateNotes(ArrayList<StickyNote> test) {
         for (StickyNote stickyNote : test) {
             stickyNote.getStickyNote().setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -400,7 +419,13 @@ public class Controller {
         }
     }
 
-
+    /***
+     * Here is the createNote method it activates when you press the + button in the program
+     * it add a new stickyNote to the arraylist, then it checks the global count which gets
+     *used for the coordinates of the notes, then we make the stickyNote on the screen by saying the last in the
+     * list should create a stickyNote pane. then we add it to the HBox which is the desktop. and activate the
+     * updateNotes Method
+     */
     @FXML
     public void createNote() {
         StickyListSingleton.getInstance().addToArray(new StickyNote());
