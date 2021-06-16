@@ -10,6 +10,11 @@ public class Save {
 
     private static File file;
 
+    /***
+     * This is our saveEverything method. we first make use of FileChooser and create a bin file
+     * then we make use of our save methods in the stickyNote Class so we make sure that the bin file
+     * has the correct information so it can load correctly. then we write it to the bin file.
+     */
     public static void createTextFile() {
         //Creating fileChooser
         FileChooser s = new FileChooser();
@@ -35,6 +40,9 @@ public class Save {
         }
     }
 
+    /***
+     * @return File
+     */
     public static File getFile() {
         return file;
     }

@@ -25,6 +25,11 @@ public class Load implements LoadInterface{
 
     }
 
+    /***
+     * Here we have a fileChooser that gives our the file we want
+     * to load
+     * @return the file we want to load
+     */
     public static File LoadTextFile() {
         //Creating fileChooser
         FileChooser s = new FileChooser();
@@ -34,7 +39,12 @@ public class Load implements LoadInterface{
 
     }
 
-    public static ArrayList<StickyNote> getLoadThing(){
+    /***
+     * here we make a new arraylist and get all the info from the bin files we have chosen.
+     * and we input the info into a arraylist and return it to the controller where it is used.
+     * @return arraylist of loaded notes
+     */
+    public static ArrayList<StickyNote> getLoadedArrayList(){
         ArrayList<StickyNote> notes = new ArrayList<>();
         try {
             InputStream in = Files.newInputStream(Load.LoadTextFile().toPath());

@@ -14,13 +14,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.Database.Database;
 import sample.Domain.*;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Controller {
 
@@ -205,7 +203,7 @@ public class Controller {
         //Loads everything, if its the single-user it open filechoser to open a bin file, if its multi-user it will open a scene that can load from database.
         loadEverything.setOnAction(e -> {
             if (!versionControl) {
-                ArrayList<StickyNote> test = Load.getLoadThing();
+                ArrayList<StickyNote> test = Load.getLoadedArrayList();
                 deleteNotes();
                 StickyListSingleton.getInstance().getArray().addAll(makeNotes(test));
                 updateNotes(StickyListSingleton.getInstance().getArray());

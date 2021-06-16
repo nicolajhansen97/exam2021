@@ -11,8 +11,17 @@ import java.util.Collections;
 public class Export {
 
     private static final ArrayList<ExportText> textList = new ArrayList<>();
+    private static final int sizeOfNoteY = 250;
+    private static final int xRadius = 100;
 
-
+    /***
+     * This method is the one that gets called in the controller when we export we start with getting
+     * clearing out textlist that is only used inside this class, we the call on fileChooser so we can
+     * create a location and name for our exportFile. we then make a loop where we get all the text and x,y coordinates
+     * and put them into a arraylist with a object made to store them called ExportText. we then
+     * call on sort array and print the text into a textFile and Export is done
+     * @param list our arraylist of notes from controller
+     */
     public static void exportToText(ArrayList<StickyNote> list){
         //choose where to export
         textList.clear();
@@ -47,16 +56,23 @@ public class Export {
             }
         }
     }
+
+    /***
+     * here we make use of our exportTextComparator which is inside the ExportText class as a separate class
+     * we then make a loop for adding a "-" to notes that are under other notes we make use of the y coordinate for
+     * that. we then use loops again to sort them with the x coordinate so the "child" notes has the right parent
+     * depending on if has the "-" and is in a 100 x radius under the "parent" note.
+     */
     public static void sortArray() {
         textList.sort(new ExportTextComparator());
         for (int i = 0; i < textList.size(); i++) {
             if (i+1!=textList.size()){
-                if (textList.get(i).getY() > textList.get(i+1).getY()+250){
+                if (textList.get(i).getY() > textList.get(i+1).getY()+sizeOfNoteY){
                     textList.get(i).addText("-");
                 }
             }
             if (i==textList.size()-1){
-                if (textList.get(i).getY() > textList.get(i-1).getY()+250){
+                if (textList.get(i).getY() > textList.get(i-1).getY()+sizeOfNoteY){
                     textList.get(i).addText("-");
                 }
             }
@@ -64,17 +80,15 @@ public class Export {
         for (int i = 0; i <textList.size(); i++) {
             if (i+1!=textList.size()) {
                 if (textList.get(i).getX()
-                        -textList.get(i+1).getX()>-100&&textList.get(i).getX()
-                        -textList.get(i+1).getX()<100&&!(textList.get(i+1).getText().contains("-"))){
-                    //move it
+                        -textList.get(i+1).getX()>-xRadius&&textList.get(i).getX()
+                        -textList.get(i+1).getX()<xRadius&&!(textList.get(i+1).getText().contains("-"))){
                     Collections.swap(textList,i,i+1);
                 }
             }
             if (i==textList.size()-1){
                 if (textList.get(i).getX()
-                        -textList.get(i-1).getX()>-100&&textList.get(i).getX()
-                        -textList.get(i-1).getX()<100&&!(textList.get(i).getText().contains("-"))){
-                    //move it
+                        -textList.get(i-1).getX()>-xRadius&&textList.get(i).getX()
+                        -textList.get(i-1).getX()<xRadius&&!(textList.get(i).getText().contains("-"))){
                     Collections.swap(textList,i,i-1);
                 }
             }
